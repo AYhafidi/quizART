@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "886114989692",
+    "project_id": "quizart-7102b",
+    "storage_bucket": "quizart-7102b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886114989692:android:eaf7f3efba8f40951c7bf9",
+        "android_client_info": {
+          "package_name": "com.google.firebase.presents.demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3E0UFntUBWg3cw0HvmcLQ_wDT7xXj0LU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
