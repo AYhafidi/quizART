@@ -1,0 +1,4 @@
+#Sun Oct 29 20:24:45 CET 2023
+base.0=/home/aymane/Desktop/GLRT/quizart/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

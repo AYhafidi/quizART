@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBVXyHuEBfSSaMnj-CgmO3Of9xQkTXbs0I</string>
+	<string>AIzaSyCsu1EsGD67WJyuV6spYKSkKSEJDaJwE0g</string>
 	<key>GCM_SENDER_ID</key>
-	<string>886114989692</string>
+	<string>255861114206</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.google.firebase.presents.demo</string>
+	<string>com.google.firebase.presents.quizart</string>
 	<key>PROJECT_ID</key>
-	<string>quizart-7102b</string>
+	<string>quizart-984d9</string>
 	<key>STORAGE_BUCKET</key>
-	<string>quizart-7102b.appspot.com</string>
+	<string>quizart-984d9.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:886114989692:ios:1432287f9a46a8231c7bf9</string>
+	<string>1:255861114206:ios:9b98609184aa706d767bcf</string>
 </dict>
 </plist>

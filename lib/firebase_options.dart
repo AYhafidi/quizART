@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -44,37 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyChu6lKAjmUdCFGGNdZC-htefuNkpJZuFo',
-    appId: '1:886114989692:web:0aafc37872ba1e9e1c7bf9',
-    messagingSenderId: '886114989692',
-    projectId: 'quizart-7102b',
-    authDomain: 'quizart-7102b.firebaseapp.com',
-    storageBucket: 'quizart-7102b.appspot.com',
+    apiKey: 'AIzaSyBJILs_rHzTZtdIB4vDKfc-Pk75X7l-6h0',
+    appId: '1:255861114206:web:1c5a84005c8dc507767bcf',
+    messagingSenderId: '255861114206',
+    projectId: 'quizart-984d9',
+    authDomain: 'quizart-984d9.firebaseapp.com',
+    storageBucket: 'quizart-984d9.appspot.com',
+    measurementId: 'G-JZTFLMQMY0',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB3E0UFntUBWg3cw0HvmcLQ_wDT7xXj0LU',
-    appId: '1:886114989692:android:eaf7f3efba8f40951c7bf9',
-    messagingSenderId: '886114989692',
-    projectId: 'quizart-7102b',
-    storageBucket: 'quizart-7102b.appspot.com',
+    apiKey: 'AIzaSyDOnsZAfioWsbJTihOFmpH44xH85-4XY4k',
+    appId: '1:255861114206:android:a5cda9ca4147e389767bcf',
+    messagingSenderId: '255861114206',
+    projectId: 'quizart-984d9',
+    storageBucket: 'quizart-984d9.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBVXyHuEBfSSaMnj-CgmO3Of9xQkTXbs0I',
-    appId: '1:886114989692:ios:1432287f9a46a8231c7bf9',
-    messagingSenderId: '886114989692',
-    projectId: 'quizart-7102b',
-    storageBucket: 'quizart-7102b.appspot.com',
-    iosBundleId: 'com.google.firebase.presents.demo',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBVXyHuEBfSSaMnj-CgmO3Of9xQkTXbs0I',
-    appId: '1:886114989692:ios:416fc03eb2dc90dd1c7bf9',
-    messagingSenderId: '886114989692',
-    projectId: 'quizart-7102b',
-    storageBucket: 'quizart-7102b.appspot.com',
-    iosBundleId: 'com.google.firebase.presents.demo.RunnerTests',
+    apiKey: 'AIzaSyCsu1EsGD67WJyuV6spYKSkKSEJDaJwE0g',
+    appId: '1:255861114206:ios:9b98609184aa706d767bcf',
+    messagingSenderId: '255861114206',
+    projectId: 'quizart-984d9',
+    storageBucket: 'quizart-984d9.appspot.com',
+    iosBundleId: 'com.google.firebase.presents.quizart',
   );
 }

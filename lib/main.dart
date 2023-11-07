@@ -1,16 +1,13 @@
-import 'package:demo/screens/loading.dart';
-import 'package:flutter/material.dart';
-import 'package:demo/screens/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:demo/firebase_options.dart';
-import 'package:demo/screens/home.dart';
+import 'package:flutter/material.dart';
+import 'package:quizart/firebase_options.dart';
+import 'package:quizart/screens/home.dart';
+import 'package:quizart/screens/laoding.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,12 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
+      title: 'Flutter Demo',
+      initialRoute: "/home",
       routes: {
-          "/" : (context) => Welcome(),
-          "/home" : (context) => Home(),
-
+        "/home" : (context) => Home(),
       },
     );
   }
 }
+
