@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:quizart/firebase_options.dart';
+import 'package:quizart/screens/QuizChoose.dart';
 import 'package:quizart/screens/home.dart';
 import 'package:quizart/screens/laoding.dart';
 
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: "/home",
+      initialRoute: "/quiz",
       routes: {
+        "/quiz" : (context) => QuizChoose(),
         "/home" : (context) => Home(),
       },
     );
