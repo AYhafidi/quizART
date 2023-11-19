@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quizart/services/toast.dart';
 
 class QuizChoose extends StatefulWidget {
   const QuizChoose({Key? key}) : super(key: key);
@@ -26,6 +28,26 @@ class _QuizChooseState extends State<QuizChoose> {
         color: Color(0xffCCCCFF),
         child: Column(
           children: [
+            GestureDetector(
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+              // Navigation vers la page d'inscription
+              Navigator.pushNamed(context, '/');
+                showToast(message: "Signed Out :");
+
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Déconnexion',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ),
             Container(
               width: width,
               height: 0.9*height,
@@ -100,8 +122,12 @@ class _QuizChooseState extends State<QuizChoose> {
                 },);
               },
             ),],
+
         ),
+
       ),
+
+
     );
   }
 }

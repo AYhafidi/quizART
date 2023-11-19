@@ -4,6 +4,9 @@ import 'package:quizart/firebase_options.dart';
 import 'package:quizart/screens/QuizChoose.dart';
 import 'package:quizart/screens/home.dart';
 import 'package:quizart/screens/laoding.dart';
+import 'package:quizart/screens/home_page.dart';
+import 'package:quizart/screens/user_info_form.dart';
+import 'package:quizart/screens/signin.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,10 +22,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: "/quiz",
+      initialRoute: "/",
       routes: {
+        '/': (context) => HomePage(),
         "/quiz" : (context) => QuizChoose(),
         "/home" : (context) => Home(),
+        '/user_info_form': (context) => UserInfoForm(),
+        '/signin': (context) => UserSignIn(), // Route to UserInfoForm
       },
     );
   }

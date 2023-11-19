@@ -8,8 +8,7 @@ import 'package:quizart/components/QuestionAnswersWidgetScales.dart';
 import 'package:quizart/components/QuestionWidget.dart';
 import 'package:quizart/screens/laoding.dart';
 import 'package:quizart/services/database.dart';
-
-
+//import 'package:quizart/components/QuestionAnswersWidgetSmileys.dart';
 
 
 class Home extends StatefulWidget {
@@ -95,6 +94,8 @@ class _HomeState extends State<Home> {
         return QuestionAnswersWidgetRanking(selectedOrderValues: responses[currentQuestionIndex].values.toList(), onOrderValueSelected: onOrderValueSelected);
       case "comment":
         return QuestionAnswersWidgetComment(comment: responses[currentQuestionIndex]["comment"], onCommentSubmitted: onAnswerSelected);
+      /*case "satisfaction":
+        return QuestionAnswersWidgetSmileys(smileys: responses[currentQuestionIndex]["answers"], onSmileySelected: onSmileySelected);*/
       default :
         return Text("Nothing found !!");
     }

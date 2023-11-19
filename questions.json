@@ -1,0 +1,147 @@
+[
+    {
+      "is_linked": true,
+      "index" : 1,
+      "réponses": {"Playing": 2, "Development": 20},
+      "text": "Do you play or develop video games?",
+      "type": "dichotomique"
+    },
+    {
+      "is_linked": true,
+      "index" : 2,
+        "réponses": {"Online Games":3, "Offline Games":11},
+        "text": "Which type do you prefer ?",
+        "type": "dichotomique"
+      },     
+      {
+        "is_linked": false,
+        "index" : 3,
+        "text": "rank these games per order of preference ?",
+        "type": "rank order",
+        "réponses": ["Action", "RPG", "Shooter", "MOBA", "Battle Royale", "Strategy", "Simulation", "Sports"]
+      },
+      {
+        "is_linked": false,
+        "index" : 4,
+        "text": "Which gaming platforms do you prefer for online gaming?",
+        "type": "multiple_choice",
+        "réponses": ["PC", "Console (e.g., Xbox, PlayStation)", "Mobile", "Other"]
+      },
+      {
+        "is_linked": false,
+        "index" : 5,
+        "text": "How often do you play online games with friends?",
+        "type": "multiple_choice",
+        "réponses": ["Every day", "Several times a week", "Once a week", "Less than once a week"]
+      },
+      { "is_linked": false,
+        "index" : 6,
+        "text": "How do you typically communicate with other players in online games ?",
+        "type": "multiple_choice",
+        "réponses": ["Voice chat", "Text chat", "In-game emotes"]
+      },
+      { "is_linked": true,
+        "index" : 7,
+        "text": "Do you prefer competitive or cooperative multiplayer games?",
+        "type": "multiple_choice",
+        "réponses": {"Competitive":9, "Cooperative":8}
+      },
+      {
+        "is_linked": false,
+        "index" : 8,
+        "text": "What is your favorite online multiplayer game?",
+        "type": "open-ended"
+      },
+      {
+        "is_linked": true,
+        "index" : 9,
+        "text": "Have you ever participated in online gaming competitions or tournaments?",
+        "type": "dichotomique",
+        "réponses": {"Yes":10, "No":9}
+      },
+      {
+        "is_linked": false,
+        "index" : 10,
+        "text": "What is the highest rank you've reached?",
+        "type": "echelle"
+      },
+      {
+        "is_linked": true,
+        "index" : 11,
+        "text": "On which gaming platforms do you primarily play offline games?",
+        "type": "dichotomique",
+        "réponses": {"PC": 14, "Game Consoles": 12, "Mobile": 16}
+      },{
+        "is_linked": false,
+         "index" : 12,
+         "text": "Which consoles are your favorites?",
+        "type": "multiple_choice",
+        "réponses": ["PlayStation", "Xbox", "Nintendo Switch", "Other"]
+      },{
+        "is_linked": false,
+        "index" : 13,
+        "text": "What are your expectations for the future of gaming consoles?",
+        "type": "open-ended"
+      },
+      {
+        "is_linked": false,
+        "index" : 14,
+        "text": "Rank these games?",
+        "type": "rank",
+        "réponses": ["Action", "RPG", "Strategy", "Simulation", "Puzzle"]
+      },{
+        "is_linked": false,
+        "index" : 15,
+        "text": "What are your expectations for the future of PC games?",
+        "type": "open-ended"
+      },
+      {
+        "is_linked": false,
+        "index" : 16,
+        "text": "What are your expectations for the future of mobile games?",
+        "type": "open-ended"
+      },
+      {
+        "is_linked": false,
+        "index" : 17,
+        "text": "Rank your favorite mobile games?",
+        "type": "ranking",
+        "réponses": ["Puzzle", "Arcade", "Simulation", "RPG", "Strategy"]
+      },      
+      {
+        "is_linked": false,
+        "index" : 18,
+        "text": "Do you prefer playing solo or with others in multiplayer modes?",
+        "type": "dichotomique",
+        "réponses": ["Solo", "Multiplayer"]
+      },
+      {
+        "is_linked": false,
+        "index" : 19,
+        "text": "How long do you play offline games per day?",
+        "type": "dichotomique",
+        "réponses": ["Less than 30 minutes", "30 minutes to 1 hour", "1 to 2 hours", "2 to 4 hours", "More than 4 hours"]
+      },
+  {
+        "is_linked": true,
+        "index": 20,
+        "text": "Which specific role in game development do you prefer the most?",
+        "type": "multiple_choice",
+        "réponses": {"Game Designer":21, "Game Programmer":22}
+      },
+  {
+    "is_linked": false,
+    "index" : 21,
+    "réponses": [
+      "😊",
+      "😄",
+      "😐",
+      "😕",
+      "😢"
+    ]
+  ,
+    "text": "Are you satisfied with this quiz?",
+    "type": "dichotomique"
+  }
+]
+  
