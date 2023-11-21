@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quizart/services/toast.dart';
 
 class QuizChoose extends StatefulWidget {
@@ -21,6 +21,7 @@ class _QuizChooseState extends State<QuizChoose> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -28,26 +29,6 @@ class _QuizChooseState extends State<QuizChoose> {
         color: Color(0xffCCCCFF),
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () {
-                FirebaseAuth.instance.signOut();
-              // Navigation vers la page d'inscription
-              Navigator.pushNamed(context, '/');
-                showToast(message: "Signed Out :");
-
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Déconnexion',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    decoration: TextDecoration.underline,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            ),
             Container(
               width: width,
               height: 0.9*height,
@@ -58,7 +39,7 @@ class _QuizChooseState extends State<QuizChoose> {
                 crossAxisSpacing: width * 0.08,
                 mainAxisSpacing: width * 0.08,
                 crossAxisCount: 2,
-                children: List.generate(Topics.length, (index) {
+                children: [...List.generate(Topics.length, (index) {
                   return GestureDetector(
                     onTap: () {
                       setState(() {
@@ -106,7 +87,7 @@ class _QuizChooseState extends State<QuizChoose> {
                       ),
                     ),
                   );
-                }),
+                })],
               ),
             )
           , FloatingActionButton.extended(
@@ -119,15 +100,12 @@ class _QuizChooseState extends State<QuizChoose> {
               onPressed: () {
                 Navigator.pushReplacementNamed(context, "/home",  arguments: {
                   'ChoosedTopic': ChoosedTopic,
+                  ...arguments,
                 },);
               },
             ),],
-
         ),
-
       ),
-
-
     );
   }
 }

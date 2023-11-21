@@ -3,6 +3,7 @@ import 'package:csc_picker/csc_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quizart/services/toast.dart';
+import 'package:quizart/services/database.dart';
 
 import 'package:quizart/services/auth.dart';
 class UserInfoForm extends StatefulWidget {
@@ -17,9 +18,10 @@ class _UserInfoFormState extends State<UserInfoForm> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  DataBaseService db = DataBaseService();
 
   String? _selectedCity;
+  String? _selectedState;
   String? _selectedCountry;
 
   final _formKey = GlobalKey<FormState>();
@@ -89,11 +91,11 @@ class _UserInfoFormState extends State<UserInfoForm> {
                 onCountryChanged: (country) {
                   setState(() {
                     _selectedCountry = country;
-                    _phoneController.text =
-                    ''; // Clear phone number on country change
                   });
                 },
-                onStateChanged: (state) {},
+                onStateChanged: (state) {
+                  _selectedState = state;
+                },
                 onCityChanged: (city) {
                   setState(() {
                     _selectedCity = city;
@@ -153,15 +155,28 @@ class _UserInfoFormState extends State<UserInfoForm> {
 
       // Retrieve selected country, state, and city
       String? selectedCountry = _selectedCountry;
-      String? selectedState = '';
+      String? selectedState = _selectedState;
       String? selectedCity = _selectedCity;
+
+
       User? user = await _auth.Register(email, password);
       setState((){
         _registered = false;
       });
       if(user != null){
         showToast(message:"user registered");
-        Navigator.pushNamed(context, '/quiz');
+        db.addUserinformation(user!.uid, {
+          "name" : name,
+          "age" : age,
+          "phoneNumber" : phoneNumber,
+          "Country" : selectedCountry,
+          "State" : selectedState,
+          "City" : selectedCity,
+          "quizes" : {},
+        });
+        Navigator.pushReplacementNamed(context, "/quiz",  arguments: {
+          "uid" :  user!.uid,
+        },);
       }else{
         showToast(message:"not registered!");
       }

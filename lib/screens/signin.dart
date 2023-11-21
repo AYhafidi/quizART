@@ -127,12 +127,15 @@ class _UserSignInState extends State<UserSignIn> {
       String password = _passwordController.text;
 
       User? user = await _auth.SignIn(email, password);
+
       setState((){
         _connected= false;
       });
       if(user != null){
         showToast(message:"user connected");
-        Navigator.pushNamed(context, '/quiz');
+        Navigator.pushReplacementNamed(context, "/quiz",  arguments: {
+            "uid" :  user!.uid,
+        },);
       }else{
         showToast(message:"not registered!");
       }

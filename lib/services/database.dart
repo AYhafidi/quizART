@@ -7,15 +7,8 @@ import 'dart:convert';
 class DataBaseService{
   // collection reference
   final CollectionReference questionCollection = FirebaseFirestore.instance.collection("Questions");
-  final CollectionReference responseCollection = FirebaseFirestore.instance.collection("Responses");
+  final CollectionReference usersCollection = FirebaseFirestore.instance.collection("Users");
 
-
-                            /* Returns the ID of a new document created in responses collection */
-
-  String newDocumentID(){
-    DocumentReference newDocRef = responseCollection.doc();
-    return newDocRef.id;
-  }
                                 /* Get the data from database*/
 
   Future<List> getData(String title) async {
@@ -35,15 +28,36 @@ class DataBaseService{
     Map<String, dynamic> data = jsonDecode(jsonString);
     questionCollection.add({"title" : data["title"], "Questions":data["Questions"]}); // <-- Set merge to true.
   }
+
+
                             /* put response in the database*/
-  Future<void> addUserResponse(String id, String question, String response) async {
+  Future<void> addUserinformation(String id, Map<String, dynamic> information) async {
     // Get docs from collection reference
-    responseCollection.doc(id).set({"question" : question, "response":response}, SetOptions(merge: true)); // <-- Set merge to true.
+    usersCollection.doc(id).set(information, SetOptions(merge: true)); // <-- Set merge to true.
   }
 
-                            /* update response in the database*/
-  Future<void> updateUserResponse(String id, String question, String response) async {
-    // Get docs from collection reference
-    responseCollection.doc(id).update({question : response}); // <-- Set merge to true.
+  Future<void> addUserResponse(String id, String title, Map<String, dynamic> data) async {
+    try {
+      // Create a map with the quizId as key and the quizData as value
+      Map<String, dynamic> quizMap = {title: data};
+
+      // Get the user's document reference
+      DocumentReference userDoc = usersCollection.doc(id);
+
+      // Get the current data of the document
+      DocumentSnapshot userSnapshot = await userDoc.get();
+      dynamic userData = userSnapshot.data();
+      // Get the current 'quizes' data from the document
+
+      Map<String, dynamic> currentQuizes = userData['quizes'] ?? {};
+
+      // Merge the new quiz data with the current 'quizes' data
+      Map<String, dynamic> updatedQuizes = {...currentQuizes, ...quizMap};
+
+      // Update the 'quizes' field in the document
+      await userDoc.update({'quizes': updatedQuizes});
+    } catch (e) {
+      print("Failed to add quiz to user: $e");
+    }
   }
 }

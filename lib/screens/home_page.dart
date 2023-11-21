@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage>
                 bottom: screenHeight * 0.35,
                 right: screenWidth * 0.33,
                 child:
-                _buildStartQuizButton(context, screenWidth, screenHeight),
+                    _buildStartQuizButton(context, screenWidth, screenHeight),
               ),
             ],
           ),
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage>
   BoxDecoration _buildBackgroundDecoration() {
     return BoxDecoration(
       image: DecorationImage(
-        image: AssetImage('../assets/background_image.png'),
+        image: AssetImage('images/background_image.jpg'),
         fit: BoxFit.cover,
       ),
     );
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage>
               value,
               style: TextStyle(
                 fontSize: screenWidth * 0.035,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
                 fontFamily: 'PressStart2P',
                 color: Color(0xff4a58a9),
               ),
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage>
       BuildContext context, double screenWidth, double screenHeight) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.pushNamed(context, '/signin');
+        Navigator.pushNamed(context, '/form');
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
