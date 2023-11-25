@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage>
       BuildContext context, double screenWidth, double screenHeight) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.pushNamed(context, '/form');
+        Navigator.pushNamed(context, '/signin');
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),

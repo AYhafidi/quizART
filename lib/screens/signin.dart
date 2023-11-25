@@ -6,6 +6,7 @@ import 'package:quizart/services/auth.dart';
 import 'package:quizart/services/toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 class UserSignIn extends StatefulWidget {
   @override
   _UserSignInState createState() => _UserSignInState();

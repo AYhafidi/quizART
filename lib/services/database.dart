@@ -8,6 +8,8 @@ class DataBaseService{
   // collection reference
   final CollectionReference questionCollection = FirebaseFirestore.instance.collection("Questions");
   final CollectionReference usersCollection = FirebaseFirestore.instance.collection("Users");
+  final CollectionReference AnswersCollection = FirebaseFirestore.instance.collection("Answers");
+
 
                                 /* Get the data from database*/
 
@@ -42,20 +44,16 @@ class DataBaseService{
       Map<String, dynamic> quizMap = {title: data};
 
       // Get the user's document reference
-      DocumentReference userDoc = usersCollection.doc(id);
+      DocumentReference userDoc = AnswersCollection.doc(id);
+
 
       // Get the current data of the document
       DocumentSnapshot userSnapshot = await userDoc.get();
-      dynamic userData = userSnapshot.data();
-      // Get the current 'quizes' data from the document
+      dynamic userData = userSnapshot.data() ?? {};
 
-      Map<String, dynamic> currentQuizes = userData['quizes'] ?? {};
+      // add the answers to firebase with the title of the quiz
+      userData.isEmpty ? await userDoc.set(quizMap) : await userDoc.update(quizMap);
 
-      // Merge the new quiz data with the current 'quizes' data
-      Map<String, dynamic> updatedQuizes = {...currentQuizes, ...quizMap};
-
-      // Update the 'quizes' field in the document
-      await userDoc.update({'quizes': updatedQuizes});
     } catch (e) {
       print("Failed to add quiz to user: $e");
     }

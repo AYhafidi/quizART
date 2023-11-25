@@ -172,7 +172,6 @@ class _UserInfoFormState extends State<UserInfoForm> {
           "Country" : selectedCountry,
           "State" : selectedState,
           "City" : selectedCity,
-          "quizes" : {},
         });
         Navigator.pushReplacementNamed(context, "/quiz",  arguments: {
           "uid" :  user!.uid,
