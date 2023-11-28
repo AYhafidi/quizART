@@ -14,26 +14,26 @@ class QuestionAnswersWidgetRanking extends StatelessWidget {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
-    final option = this.selectedOrderValues.removeAt(oldIndex);
-    this.selectedOrderValues.insert(newIndex, option);
+    final option = selectedOrderValues.removeAt(oldIndex);
+    selectedOrderValues.insert(newIndex, option);
     onOrderValueSelected(selectedOrderValues);
   }
 
   @override
   Widget build(BuildContext context) {
 
-    return  Container(
+    return  SizedBox(
       height: 300, // Set a specific height
       child: ReorderableListView(
-        children: List.generate(this.selectedOrderValues.length, (index) {
-          final option = this.selectedOrderValues[index];
+        onReorder: onReorder,
+        children: List.generate(selectedOrderValues.length, (index) {
+          final option = selectedOrderValues[index];
           return ListTile(
             key: Key(option),
             title: Text(option),
-            leading: Icon(Icons.drag_handle),
+            leading: const Icon(Icons.drag_handle),
           );
         }),
-        onReorder: onReorder,
       ),
     );
   }

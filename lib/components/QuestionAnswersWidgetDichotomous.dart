@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class QuestionAnswersWidgetDichotomous extends StatelessWidget {
   final List answers;
-  final int selectedAnswerIndex;
-  final Function(String ,int) onDichotomousAnswerSelected;
+  final String selectedAnswer;
+  final Function(String) onDichotomousAnswerSelected;
 
-  QuestionAnswersWidgetDichotomous({
+  const QuestionAnswersWidgetDichotomous({super.key, 
     required this.answers,
-    required this.selectedAnswerIndex,
+    required this.selectedAnswer,
     required this.onDichotomousAnswerSelected,
   });
 
@@ -19,14 +19,14 @@ class QuestionAnswersWidgetDichotomous extends StatelessWidget {
         return RadioListTile<int>(
           title: Text(
             answers[index],
-            style: TextStyle(fontSize: 18.0),
+            style: const TextStyle(fontSize: 18.0),
           ),
           value: index,
-          groupValue: selectedAnswerIndex,
+          groupValue: answers.indexOf(selectedAnswer ),
           onChanged: (value) {
-            onDichotomousAnswerSelected(answers[value!], value ?? 0);
+            onDichotomousAnswerSelected(answers[value!]);
           },
-          activeColor: Color(0xFFBB2649),
+          activeColor: const Color(0xFFBB2649),
         );
       }),
     );

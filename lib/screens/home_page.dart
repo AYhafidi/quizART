@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+
   late ValueNotifier<String> welcomeTextNotifier;
   late AnimationController _blinkController;
 
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage>
     welcomeTextNotifier = ValueNotifier<String>('');
     _blinkController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     )..repeat(reverse: true);
     _animateText();
   }
@@ -27,12 +28,12 @@ class _HomePageState extends State<HomePage>
     for (String line in lines) {
       for (int i = 0; i < line.length; i++) {
         await Future.delayed(
-            Duration(milliseconds: 65)); // Adjust animation speed here
+            const Duration(milliseconds: 65)); // Adjust animation speed here
         welcomeTextNotifier.value =
             text.substring(0, text.indexOf(line) + i + 1);
       }
       await Future.delayed(
-          Duration(milliseconds: 65)); // Pause for a second between lines
+          const Duration(milliseconds: 65)); // Pause for a second between lines
     }
   }
 
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage>
   }
 
   BoxDecoration _buildBackgroundDecoration() {
-    return BoxDecoration(
+    return const BoxDecoration(
       image: DecorationImage(
         image: AssetImage('images/background_image.jpg'),
         fit: BoxFit.cover,
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage>
 
   Widget _buildWelcomeMessage(double screenWidth) {
     return Padding(
-      padding: EdgeInsets.all(70.0),
+      padding: const EdgeInsets.all(70.0),
       child: Align(
         alignment: Alignment.center,
         child: ValueListenableBuilder<String>(
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage>
                 fontSize: screenWidth * 0.035,
                 fontWeight: FontWeight.normal,
                 fontFamily: 'PressStart2P',
-                color: Color(0xff4a58a9),
+                color: const Color(0xff4a58a9),
               ),
               textAlign: TextAlign.center,
             );
@@ -111,6 +112,13 @@ class _HomePageState extends State<HomePage>
       onPressed: () {
         Navigator.pushNamed(context, '/signin');
       },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFFFF488E),
+        minimumSize: Size(screenWidth * 0.3, screenHeight * 0.08),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
         child: Text(
@@ -122,13 +130,7 @@ class _HomePageState extends State<HomePage>
           ),
         ),
       ),
-      style: ElevatedButton.styleFrom(
-        primary: Color(0xFFFF488E),
-        minimumSize: Size(screenWidth * 0.3, screenHeight * 0.08),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-      ),
     );
   }
 }
+

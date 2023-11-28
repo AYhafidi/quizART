@@ -6,7 +6,7 @@ class QuestionAnswersWidgetScales extends StatelessWidget {
   final Map SelectedAnswers;
   final Function(String, dynamic) onScaleValueSelected;
 
-  QuestionAnswersWidgetScales({
+  const QuestionAnswersWidgetScales({super.key, 
     required this.Scale,
     required this.answers,
     required this.SelectedAnswers,
@@ -25,23 +25,23 @@ class QuestionAnswersWidgetScales extends StatelessWidget {
             children: [
               Text(
                 answers[index],
-                style: TextStyle(fontSize: 18.0), // Increase font size
+                style: const TextStyle(fontSize: 18.0), // Increase font size
               ),
               Slider(
-                value: SelectedAnswers[this.answers[index]]?.toDouble() ?? this.Scale[0].toDouble()!,
-                min: this.Scale[0].toDouble()!,
-                max: this.Scale[1].toDouble()!,
-                divisions: this.Scale[1]!,
+                value: SelectedAnswers[answers[index]]?.toDouble() ?? Scale[0].toDouble()!,
+                min: Scale[0].toDouble()!,
+                max: Scale[1].toDouble()!,
+                divisions: Scale[1]!,
                 onChanged: (value) {
-                  onScaleValueSelected(this.answers[index], value.toInt());
+                  onScaleValueSelected(answers[index], value.toInt());
                 },
-                activeColor: Color(0xFFBB2649),
+                activeColor: const Color(0xFFBB2649),
               ),
-              SizedBox(
+              const SizedBox(
                 width:10,
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
                       color: Colors.blue,  // specify the color you want
@@ -51,8 +51,8 @@ class QuestionAnswersWidgetScales extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                    SelectedAnswers[this.answers[index]]!.toString(),
-                    style: TextStyle(
+                    SelectedAnswers[answers[index]]!.toString(),
+                    style: const TextStyle(
                       fontFamily: "lato",
                       color: Colors.cyan,
                       fontWeight: FontWeight.bold,

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:csc_picker/csc_picker.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quizart/services/auth.dart';
 import 'package:quizart/services/toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class UserSignIn extends StatefulWidget {
+  const UserSignIn({super.key});
+
   @override
   _UserSignInState createState() => _UserSignInState();
 }
@@ -19,6 +18,7 @@ class _UserSignInState extends State<UserSignIn> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  @override
   void dispose(){
     _emailController.dispose();
     _passwordController.dispose();
@@ -29,10 +29,10 @@ class _UserSignInState extends State<UserSignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('LogIn'),
+        title: const Text('LogIn'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -42,32 +42,32 @@ class _UserSignInState extends State<UserSignIn> {
               _buildTextField('Email', _emailController,
                   keyboardType: TextInputType.emailAddress,
                   validator: _validateEmail),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 obscureText: true,
                 controller: _passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               ElevatedButton(
                 onPressed: () {
                   _submitFormSignIn();
                 },
-                child: Text('Connect'),
+                child: const Text('Connect'),
               ),
-              SizedBox(height: 16.0), // Espacement entre les boutons
+              const SizedBox(height: 16.0), // Espacement entre les boutons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton.icon(
                     onPressed: () {
                     },
-                    icon: FaIcon(FontAwesomeIcons.google),
-                    label: Text('Connect with Google',style: TextStyle(color:Colors.white,
+                    icon: const FaIcon(FontAwesomeIcons.google),
+                    label: const Text('Connect with Google',style: TextStyle(color:Colors.white,
                     fontWeight: FontWeight.bold)),
                   ),
                 ],
@@ -77,7 +77,7 @@ class _UserSignInState extends State<UserSignIn> {
                   // Navigation vers la page d'inscription
                   Navigator.pushNamed(context, '/user_info_form');
                 },
-                child: Text(
+                child: const Text(
                   'Pas encore inscrit ? Créer un compte',
                   style: TextStyle(
                     color: Colors.blue,
@@ -100,7 +100,7 @@ class _UserSignInState extends State<UserSignIn> {
       keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: label,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
       validator: validator,
     );
@@ -135,7 +135,7 @@ class _UserSignInState extends State<UserSignIn> {
       if(user != null){
         showToast(message:"user connected");
         Navigator.pushReplacementNamed(context, "/quiz",  arguments: {
-            "uid" :  user!.uid,
+            "uid" :  user.uid,
         },);
       }else{
         showToast(message:"not registered!");

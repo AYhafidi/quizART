@@ -7,6 +7,8 @@ import 'package:quizart/services/database.dart';
 
 import 'package:quizart/services/auth.dart';
 class UserInfoForm extends StatefulWidget {
+  const UserInfoForm({super.key});
+
   @override
   _UserInfoFormState createState() => _UserInfoFormState();
 }
@@ -26,6 +28,7 @@ class _UserInfoFormState extends State<UserInfoForm> {
 
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
+  @override
   void dispose(){
     _nameController.dispose();
     _ageController.dispose();
@@ -38,29 +41,29 @@ class _UserInfoFormState extends State<UserInfoForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Info Form'),
+        title: const Text('User Info Form'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               _buildTextField('Nom et Prénom', _nameController),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildTextField('Âge', _ageController,
                   keyboardType: TextInputType.number),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
                 child: IntlPhoneField(
                   controller: _phoneController,
-                  decoration: InputDecoration.collapsed(
+                  decoration: const InputDecoration.collapsed(
                     hintText: 'Numéro de téléphone',
                   ),
 
@@ -72,20 +75,20 @@ class _UserInfoFormState extends State<UserInfoForm> {
                 ),
 
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildTextField('Email', _emailController,
                   keyboardType: TextInputType.emailAddress,
                   validator: _validateEmail),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 obscureText: true,
                 controller: _passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CSCPicker(
                 layout: Layout.vertical,
                 onCountryChanged: (country) {
@@ -102,12 +105,12 @@ class _UserInfoFormState extends State<UserInfoForm> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                    _submitForm();
                    showToast(message: "user created");},
-                child: Text('Submit'),
+                child: const Text('Submit'),
               ),
             ],
           ),
@@ -123,7 +126,7 @@ class _UserInfoFormState extends State<UserInfoForm> {
       keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: label,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
       validator: validator,
     );
@@ -165,7 +168,7 @@ class _UserInfoFormState extends State<UserInfoForm> {
       });
       if(user != null){
         showToast(message:"user registered");
-        db.addUserinformation(user!.uid, {
+        db.addUserinformation(user.uid, {
           "name" : name,
           "age" : age,
           "phoneNumber" : phoneNumber,
@@ -174,7 +177,7 @@ class _UserInfoFormState extends State<UserInfoForm> {
           "City" : selectedCity,
         });
         Navigator.pushReplacementNamed(context, "/quiz",  arguments: {
-          "uid" :  user!.uid,
+          "uid" :  user.uid,
         },);
       }else{
         showToast(message:"not registered!");

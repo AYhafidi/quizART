@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:quizart/firebase_options.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 
@@ -13,20 +12,32 @@ class DataBaseService{
 
                                 /* Get the data from database*/
 
-  Future<List> getData(String title) async {
+  Future<Map> getData(String title) async {
     // Get docs from collection reference
-    QuerySnapshot querySnapshot = await questionCollection
-        .where('title', isEqualTo: title)
-        .get();
 
-    // Get data from docs and convert map to List.
-    List data = querySnapshot.docs.map((doc) => doc.data()).toList();
-    return data[0]["Questions"];
+    try{
+      QuerySnapshot querySnapshot = await questionCollection
+          .where('title', isEqualTo: title)
+          .limit(1) // Limit the result to 1 document
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        dynamic data = querySnapshot.docs.first.data();
+        return data["Questions"]; // Return the first (and only) document
+      } else {
+        return {}; // No document found
+      }
+
+    }
+    catch(e){
+      print('Error: $e');
+      return {};
+    }
+
   }
 
   Future<void> addQuestions(String File) async {
     // Get docs from collection reference
-    String jsonString = await rootBundle.loadString('data.json');
+    String jsonString = await rootBundle.loadString(File);
     Map<String, dynamic> data = jsonDecode(jsonString);
     questionCollection.add({"title" : data["title"], "Questions":data["Questions"]}); // <-- Set merge to true.
   }

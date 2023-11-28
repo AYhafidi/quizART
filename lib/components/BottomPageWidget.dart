@@ -16,23 +16,23 @@ class  BottomPageWidget extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                onPressed: this.goToPreviousQuestion,
+                onPressed: goToPreviousQuestion,
                 style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
-                Color(0xFFBB2649)),
+                const Color(0xFFBB2649)),
                 ),
-                child: Text('Previous Question'),
+                child: const Text('Previous Question'),
                 ),
                 ),
           Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                onPressed: this.goToNextQuestion,
+                onPressed: goToNextQuestion,
                 style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
-                Color(0xFFBB2649)),
+                const Color(0xFFBB2649)),
                 ),
-                child: Text('Next Question'),
+                child: const Text('Next Question'),
                 ),
                 ),
       ],

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:quizart/services/toast.dart';
 
 class QuizChoose extends StatefulWidget {
   const QuizChoose({Key? key}) : super(key: key);
@@ -26,7 +24,7 @@ class _QuizChooseState extends State<QuizChoose> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        color: Color(0xffCCCCFF),
+        color: const Color(0xffCCCCFF),
         child: Column(
           children: [
             Container(
@@ -50,7 +48,7 @@ class _QuizChooseState extends State<QuizChoose> {
                       width: width * 0.6,
                       height: width * 0.6,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           colors: [
                             Color(0xffEE9CA7),
                             Color(0xffFFDDE1),
@@ -58,13 +56,13 @@ class _QuizChooseState extends State<QuizChoose> {
                           begin: Alignment.topRight,
                           end: Alignment.bottomLeft,
                         ),
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
                         boxShadow: [
                           BoxShadow(
                             color: ChoosedTopic == Topics[index]
                                   ?Colors.black.withOpacity(0.4)
                                   :Colors.black.withOpacity(0.2),
-                            offset: Offset(0, 4),
+                            offset: const Offset(0, 4),
                             blurRadius: ChoosedTopic == Topics[index]
                                 ?4
                                 :5,
@@ -91,9 +89,9 @@ class _QuizChooseState extends State<QuizChoose> {
               ),
             )
           , FloatingActionButton.extended(
-              label: Text("Let's go to ${ChoosedTopic} Quiz"), // <-- Text
+              label: Text("Let's go to $ChoosedTopic Quiz"), // <-- Text
               backgroundColor: Colors.black,
-              icon: Icon( // <-- Icon
+              icon: const Icon( // <-- Icon
                 Icons.start,
                 size: 24.0,
               ),

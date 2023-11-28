@@ -1,8 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quizart/services/toast.dart';
 class AuthentService {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+  userIsLogIn(Function userLogedIn, bool mounted)async{
+    _auth.authStateChanges().listen(( User? user) {
+            if(user!=null && mounted){
+              userLogedIn(true);
+            }
+    });
+  }
 //Inscription
 Future<User?>  Register (String email, String password) async{
 try {

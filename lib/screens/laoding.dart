@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:quizart/services/database.dart';
+
 class Loading extends StatefulWidget {
+  const Loading({super.key});
+
   @override
   _LoadingState createState() => _LoadingState();
 }
@@ -8,10 +12,12 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> {
   double width = 100, height = 100, boxX = 1, boxY = 1;
   late double screenWidth, screenHeight;
+  DataBaseService db = DataBaseService();
 
   @override
   void initState() {
     super.initState();
+    //db.addQuestions("data.json");
   }
 
   void _moveBox() {
@@ -32,7 +38,7 @@ class _LoadingState extends State<Loading> {
       body: GestureDetector(
         onTap: _moveBox,
         child: AnimatedContainer(
-            duration: Duration(seconds: 1),
+            duration: const Duration(seconds: 1),
             color: Colors.cyanAccent,
             width: width,
             height: height,

@@ -18,11 +18,11 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(this.size *0.08, 0, 0, 0),
+      margin: EdgeInsets.fromLTRB(size *0.08, 0, 0, 0),
       transform: choosed ? Matrix4.diagonal3Values(1.04, 1.04, 1) : Matrix4.identity(),
       padding: EdgeInsets.zero,
-      width: this.size / 1.618,
-      height: this.size ,
+      width: size / 1.618,
+      height: size ,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         color: Colors.white, // You can set a background color if needed
@@ -31,7 +31,7 @@ class CardWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -40,16 +40,16 @@ class CardWidget extends StatelessWidget {
         children: [
           Opacity(
             opacity: choosed ? 1:0.5,
-            child: Container(
-                width: this.size/ 1.618 ,
-                height: this.size * 0.8 ,
+            child: SizedBox(
+                width: size/ 1.618 ,
+                height: size * 0.8 ,
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(borderRadius),
                     topRight: Radius.circular(borderRadius),
                   ),
                   child: Image(
-                    image: AssetImage("images/${answer}.png"),
+                    image: AssetImage("images/$answer.png"),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -62,8 +62,8 @@ class CardWidget extends StatelessWidget {
                   bottomRight: Radius.circular(borderRadius),
                 ),
               ),
-              height: this.size * 0.145 ,
-              width: this.size/ 1.618,
+              height: size * 0.145 ,
+              width: size/ 1.618,
               child: Center(
                 child: Text(
                   answer,

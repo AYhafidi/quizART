@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class QuestionAnswersWidgetComment extends StatelessWidget {
   final String comment;
-  final Function(String, dynamic) onCommentSubmitted;
+  final Function(String) onCommentSubmitted;
 
   QuestionAnswersWidgetComment({super.key,
     required this.comment,
     required this.onCommentSubmitted});
 
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   Timer _timer = Timer(const Duration(milliseconds: 0), (){});
 
 
@@ -17,9 +17,9 @@ class QuestionAnswersWidgetComment extends StatelessWidget {
     if (_timer.isActive) {
       _timer.cancel();
     }
-      _timer = Timer(const Duration(milliseconds: 500), (){
-        onCommentSubmitted("comment", text);
-      });
+    _timer = Timer(const Duration(milliseconds: 500), (){
+      onCommentSubmitted(text);
+    });
 
 
   }
@@ -34,7 +34,7 @@ class QuestionAnswersWidgetComment extends StatelessWidget {
       ),
     );
     return Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
           TextField(
@@ -43,12 +43,12 @@ class QuestionAnswersWidgetComment extends StatelessWidget {
               },
             controller: _controller,
             maxLines: 4,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
             labelText: 'Your Comment',
             border: OutlineInputBorder(),
           ),
         ),
-        SizedBox(height: 16.0),
+        const SizedBox(height: 16.0),
     ],
     ),
     );

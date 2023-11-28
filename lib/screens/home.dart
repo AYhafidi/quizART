@@ -22,12 +22,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  List questions = []; // questions that we got from the database
-  Map<String, Map<String, dynamic>> responses = {};    // list of client responses
+  Map questions = {}; // questions that we got from the database
+  Map<String, dynamic> answers = {};    // list of client answers
   bool isLoaded = false;   // true if we got the questions without problems
   String topic = "";
   String uid = "";
-  int currentQuestionIndex = 0; // Index of the current question
+  String currentQuestionIndex = "1"; // Index of the current question
   DataBaseService db = DataBaseService();
   late dynamic data;
 
@@ -42,89 +42,101 @@ class _HomeState extends State<Home> {
   void getData(String topic) async {
     questions = await db.getData(topic);
     setState(() {
-      isLoaded = !(questions == []);
+      isLoaded = questions.isNotEmpty;
       }
     );
     prepareResponses();
   }
 
+  Map listToMap(List array){
+    Map map = Map.fromEntries(
+      array.asMap().entries.map((entry) => MapEntry(entry.key.toString(), entry.value)),
+    );
+
+    return map;
+  }
+
+
 
   void goToNextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
+    String index = questions[currentQuestionIndex]["is_linked"] ? questions[currentQuestionIndex]["nextIndex"][answers[currentQuestionIndex]] : questions[currentQuestionIndex]["nextIndex"];
+    if (index == "-1") {
+      db.addUserResponse(uid, "Video games", answers);
+      Navigator.pushReplacementNamed(context, "/quiz"); // navigate to the page of choosing topics
+    }else{
+      questions[index]["prevIndex"] = currentQuestionIndex ;
       setState(() {
-        currentQuestionIndex++;
+        currentQuestionIndex = index;
       });
-      if (responses[currentQuestionIndex.toString()] == null){
+      if (answers[currentQuestionIndex] == null){
         prepareResponses();
       }
-    }else if(currentQuestionIndex == questions.length - 1 ){
-      db.addUserResponse(uid, topic, responses);
     }
   }
 
 
   void goToPreviousQuestion() {
-    if (currentQuestionIndex > 0) {
-      setState(() {
-        currentQuestionIndex--;
-      });
-    }
+    setState(() {
+      currentQuestionIndex = questions[currentQuestionIndex]["prevIndex"] == -1 ? currentQuestionIndex : questions[currentQuestionIndex]["prevIndex"];
+    });
+
   }
 
   void onAnswerSelected(String answer, dynamic value){
     setState(() {
-      responses[currentQuestionIndex.toString()]![answer] = value;
+      answers[currentQuestionIndex]![answer] = value;
     });
   }
 
-  void onDichotomousAnswerSelected(String answer, int value){
+  void onDichotomousCommentAnswerSelected(String answer){
     setState(() {
-      responses[currentQuestionIndex.toString()] = {answer : value};
+      answers[currentQuestionIndex] = answer;
     });
   }
 
-  void onOrderValueSelected(List answers){
+  void onOrderValueSelected(List qAnswers){
+
     setState(() {
-      responses[currentQuestionIndex.toString()] = Map<String, dynamic>.from(answers.asMap()) ;
+      answers[currentQuestionIndex] = listToMap(qAnswers) ;
     });
   }
 
   Widget getWidget(String type){
     switch(type){
       case "dichotomous":
-        return QuestionAnswersWidgetDichotomous(answers: questions[currentQuestionIndex]["answers"] ?? ["Doesn't work $currentQuestionIndex"], selectedAnswerIndex: responses[currentQuestionIndex.toString()]!.values.toList()[0].toInt() ?? [0], onDichotomousAnswerSelected: onDichotomousAnswerSelected);
+        return QuestionAnswersWidgetDichotomous(answers: questions[currentQuestionIndex]["answers"] , selectedAnswer: answers[currentQuestionIndex] , onDichotomousAnswerSelected: onDichotomousCommentAnswerSelected);
       case "qcm":
-        return QuestionAnswersWidgetMCQ(answers: questions[currentQuestionIndex]["answers"] ?? ["Doesn't work $currentQuestionIndex"], SelectedAnswers: responses[currentQuestionIndex.toString()]!, onMCQAnswerSelected: onAnswerSelected);
+        return QuestionAnswersWidgetMCQ(answers: questions[currentQuestionIndex]["answers"] ?? ["Doesn't work $currentQuestionIndex"], SelectedAnswers: answers[currentQuestionIndex]!, onMCQAnswerSelected: onAnswerSelected);
       case "scale":
-        return QuestionAnswersWidgetScales(Scale: questions[currentQuestionIndex]["scale"] ?? ["Doesn't work $currentQuestionIndex"], answers: questions[currentQuestionIndex]["answers"], SelectedAnswers: responses[currentQuestionIndex.toString()]!, onScaleValueSelected: onAnswerSelected);
+        return QuestionAnswersWidgetScales(Scale: questions[currentQuestionIndex]["scale"] ?? ["Doesn't work $currentQuestionIndex"], answers: questions[currentQuestionIndex]["answers"], SelectedAnswers: answers[currentQuestionIndex]!, onScaleValueSelected: onAnswerSelected);
       case "rank":
-        return QuestionAnswersWidgetRanking(selectedOrderValues: responses[currentQuestionIndex.toString()]!.values.toList(), onOrderValueSelected: onOrderValueSelected);
+        return QuestionAnswersWidgetRanking(selectedOrderValues: answers[currentQuestionIndex]!.values.toList(), onOrderValueSelected: onOrderValueSelected);
       case "comment":
-        return QuestionAnswersWidgetComment(comment: responses[currentQuestionIndex.toString()]!["comment"], onCommentSubmitted: onAnswerSelected);
+        return QuestionAnswersWidgetComment(comment: answers[currentQuestionIndex], onCommentSubmitted: onDichotomousCommentAnswerSelected);
       case "image":
-        return QuestionAnswersWidgetImage(answers: questions[currentQuestionIndex]["answers"], selectedAnswers: responses[currentQuestionIndex.toString()]!, onImageAnswerSelected: onAnswerSelected);
+        return QuestionAnswersWidgetImage(answers: questions[currentQuestionIndex]["answers"], selectedAnswers: answers[currentQuestionIndex]!, onImageAnswerSelected: onAnswerSelected);
       default :
-        return Text("Nothing found !!");
+        return const Text("Nothing found !!");
     }
 
   }
 
   void prepareResponses(){
-    responses[currentQuestionIndex.toString()] = {};
+    answers[currentQuestionIndex] = {};
     switch(questions[currentQuestionIndex]["type"]){
       case "dichotomous":
-        responses[currentQuestionIndex.toString()]![questions[currentQuestionIndex]["answers"][0]] = 0;
+        answers[currentQuestionIndex] = questions[currentQuestionIndex]["answers"][0];
       case "qcm":
       case "image":
-        questions[currentQuestionIndex]["answers"].forEach((element) => responses[currentQuestionIndex.toString()]![element]=false);
+        questions[currentQuestionIndex]["answers"].forEach((element) => answers[currentQuestionIndex]![element]=false);
       case "scale":
-        questions[currentQuestionIndex]["answers"].forEach((element) => responses[currentQuestionIndex.toString()]![element]= questions[currentQuestionIndex]["scale"][0]);
+        questions[currentQuestionIndex]["answers"].forEach((element) => answers[currentQuestionIndex]![element]= questions[currentQuestionIndex]["scale"][0]);
       case "rank":
-        //responses[currentQuestionIndex.toString()] = questions[currentQuestionIndex]["answers"].asMap();
-        questions[currentQuestionIndex]["answers"].asMap().forEach((index, element) => responses[currentQuestionIndex.toString()]![index.toString()] = element );
-        //print(responses[currentQuestionIndex.toString()]);
+        //answers[currentQuestionIndex] = questions[currentQuestionIndex]["answers"].asMap();
+        questions[currentQuestionIndex]["answers"].asMap().forEach((index, element) => answers[currentQuestionIndex]![index.toString()] = element );
+        //print(answers[currentQuestionIndex]);
       case "comment":
-        responses[currentQuestionIndex.toString()] = {"comment":""};
+        answers[currentQuestionIndex] = "";
     }
   }
 
@@ -140,11 +152,11 @@ class _HomeState extends State<Home> {
 
 
     // Retrieve arguments
-    return !isLoaded ?Loading() : Scaffold(
+    return !isLoaded ?const Loading() : Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyanAccent,
         centerTitle: true,
-        title: Text("Helllllllllllllllo"),
+        title: const Text("Helllllllllllllllo"),
       ),
       body: Center(
         child: Column(

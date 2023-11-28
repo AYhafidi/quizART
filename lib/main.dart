@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:quizart/firebase_options.dart';
 import 'package:quizart/screens/QuizChoose.dart';
 import 'package:quizart/screens/home.dart';
-import 'package:quizart/screens/laoding.dart';
 import 'package:quizart/screens/home_page.dart';
+import 'package:quizart/screens/laoding.dart';
 import 'package:quizart/screens/user_info_form.dart';
 import 'package:quizart/screens/signin.dart';
 
@@ -14,21 +14,27 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: "/signin",
+      initialRoute: "/",
       routes: {
-        '/': (context) => HomePage(),
-        "/quiz" : (context) => QuizChoose(),
-        "/home" : (context) => Home(),
-        '/user_info_form': (context) => UserInfoForm(),
-        '/signin': (context) => UserSignIn(), // Route to UserInfoForm
+        '/': (context) => const HomePage(),
+        '/loading':(context) => const Loading(),
+        "/quiz" : (context) => const QuizChoose(),
+        "/home" : (context) => const Home(),
+        '/user_info_form': (context) => const UserInfoForm(),
+        '/signin': (context) => const UserSignIn(), // Route to UserInfoForm
       },
     );
   }

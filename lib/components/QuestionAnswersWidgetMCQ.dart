@@ -18,19 +18,19 @@ class QuestionAnswersWidgetMCQ extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: List.generate(this.answers.length, (index) {
+        children: List.generate(answers.length, (index) {
           return Row(
             children: [
               Checkbox(
-                value: this.SelectedAnswers[answers[index]],
+                value: SelectedAnswers[answers[index]],
                 onChanged: (value) {
                   onMCQAnswerSelected(answers[index], value!);
                 },
-                activeColor: Color(0xFFBB2649),
+                activeColor: const Color(0xFFBB2649),
               ),
               Text(
-                this.answers[index],
-                style: TextStyle(fontSize: 18.0), // Increase font size
+                answers[index],
+                style: const TextStyle(fontSize: 18.0), // Increase font size
               ),
             ],
           );
