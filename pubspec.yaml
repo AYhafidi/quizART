@@ -34,6 +34,8 @@ dependencies:
   firebase_auth: ^4.3.0
   fluttertoast: ^8.2.2
   font_awesome_flutter: ^10.2.1
+  carousel_slider: ^4.0.0
+  google_fonts: ^6.1.0
   google_sign_in: ^5.2.1
   csc_picker: ^0.2.7
   intl_phone_field: ^2.0.6
