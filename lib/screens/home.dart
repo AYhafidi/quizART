@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quizart/components/BottomPageWidget.dart';
 import 'package:quizart/components/QuestionAnswersWidgetComment.dart';
 import 'package:quizart/components/QuestionAnswersWidgetDichotomous.dart';
 import 'package:quizart/components/QuestionAnswersWidgetImage.dart';
@@ -7,6 +6,7 @@ import 'package:quizart/components/QuestionAnswersWidgetMCQ.dart';
 import 'package:quizart/components/QuestionAnswersWidgetRanking.dart';
 import 'package:quizart/components/QuestionAnswersWidgetScales.dart';
 import 'package:quizart/components/QuestionWidget.dart';
+import 'package:quizart/screens/QuizChoose.dart';
 import 'package:quizart/screens/laoding.dart';
 import 'package:quizart/services/database.dart';
 
@@ -97,7 +97,12 @@ class _HomeState extends State<Home> {
     String index = questions[currentQuestionIndex]["is_linked"] ? questions[currentQuestionIndex]["nextIndex"][answers[currentQuestionIndex]] : questions[currentQuestionIndex]["nextIndex"];
     if (index == "-1") {
       db.addUserResponse(widget.uid, widget.topic, answers);
-      Navigator.pushReplacementNamed(context, "/quiz"); // navigate to the page of choosing topics
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => QuizChoose(uid: widget.uid),
+        ),
+      );
     }else{
       questions[index]["prevIndex"] = currentQuestionIndex ;
       setState(() {

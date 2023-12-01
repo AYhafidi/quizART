@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quizart/screens/QuizChoose.dart';
 import 'package:quizart/services/auth.dart';
 import 'package:quizart/services/toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+
 
 class UserSignIn extends StatefulWidget {
   const UserSignIn({super.key});
@@ -24,6 +27,8 @@ class _UserSignInState extends State<UserSignIn> {
     _passwordController.dispose();
     super.dispose();
   }
+
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -54,7 +59,8 @@ class _UserSignInState extends State<UserSignIn> {
               const SizedBox(height: 20),
 
               ElevatedButton(
-                onPressed: () {
+                onPressed: ()async {
+
                   _submitFormSignIn();
                 },
                 child: const Text('Connect'),
@@ -134,9 +140,12 @@ class _UserSignInState extends State<UserSignIn> {
       });
       if(user != null){
         showToast(message:"user connected");
-        Navigator.pushReplacementNamed(context, "/quiz",  arguments: {
-            "uid" :  user.uid,
-        },);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizChoose(uid: user.uid),
+          ),
+        );
       }else{
         showToast(message:"not registered!");
       }

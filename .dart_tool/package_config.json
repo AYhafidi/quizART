@@ -338,6 +338,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "hive",
+      "rootUri": "file:///C:/Users/ayman/AppData/Local/Pub/Cache/hosted/pub.dev/hive-2.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "hive_flutter",
+      "rootUri": "file:///C:/Users/ayman/AppData/Local/Pub/Cache/hosted/pub.dev/hive_flutter-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http",
       "rootUri": "file:///C:/Users/ayman/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.1.2",
       "packageUri": "lib/",
@@ -627,7 +639,7 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///C:/Users/ayman/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.1.0",
+      "rootUri": "file:///C:/Users/ayman/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
@@ -650,7 +662,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-12-01T09:51:13.008535Z",
+  "generated": "2023-12-01T22:19:47.156307Z",
   "generator": "pub",
   "generatorVersion": "3.2.1"
 }

@@ -37,19 +37,21 @@ class QuestionAnswersWidgetRanking extends StatelessWidget {
                   key: Key(option),
                   height: 75.0,
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
                     decoration: BoxDecoration(
                       color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.0),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.48),
-                          spreadRadius: 3,
-                          blurRadius: 13,
-                          offset: Offset(2, 3),
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
                     child: ListTile(
+
                       title: Text(
                         option,
                         style: TextStyle(
