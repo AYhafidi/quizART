@@ -7,6 +7,7 @@ import 'package:quizart/screens/home_page.dart';
 import 'package:quizart/screens/laoding.dart';
 import 'package:quizart/screens/user_info_form.dart';
 import 'package:quizart/screens/signin.dart';
+import 'package:quizart/screens/SplashScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: "/",
+      initialRoute: "/splash",
       routes: {
         '/': (context) => const HomePage(),
         '/loading':(context) => const Loading(),
@@ -35,6 +36,8 @@ class _MyAppState extends State<MyApp> {
         "/home" : (context) => const Home(),
         '/user_info_form': (context) => const UserInfoForm(),
         '/signin': (context) => const UserSignIn(), // Route to UserInfoForm
+        '/splash': (context) => const SplashScreen(),
+        
       },
     );
   }
