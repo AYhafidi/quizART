@@ -14,7 +14,9 @@ import 'package:quizart/services/database.dart';
 
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String topic;
+  final String uid;
+  const Home({super.key, required this.topic, required this.uid});
 
   @override
   State<Home> createState() => _HomeState();
@@ -61,19 +63,15 @@ class _HomeState extends State<Home> {
 
   }; // questions that we got from the database
   Map<String, dynamic> answers = {};    // list of client answers
-  bool isLoaded = true;   // true if we got the questions without problems
-  String topic = "";
-  String uid = "";
+  bool isLoaded = false;   // true if we got the questions without problems
   String currentQuestionIndex = "1"; // Index of the current question
   DataBaseService db = DataBaseService();
-  late dynamic data;
 
   @override
   initState()  {         // this is called when the class is initialized or called for the first time
     super.initState(); //  this is the material super constructor for init state to link your instance initState to the global initState context
-    //getData(topic);
-    //getData("Video games");
-    prepareResponses();
+    getData(widget.topic);
+    //prepareResponses();
   }
 
   void getData(String topic) async {
@@ -98,7 +96,7 @@ class _HomeState extends State<Home> {
   void goToNextQuestion() {
     String index = questions[currentQuestionIndex]["is_linked"] ? questions[currentQuestionIndex]["nextIndex"][answers[currentQuestionIndex]] : questions[currentQuestionIndex]["nextIndex"];
     if (index == "-1") {
-      db.addUserResponse(uid, "Video games", answers);
+      db.addUserResponse(widget.uid, widget.topic, answers);
       Navigator.pushReplacementNamed(context, "/quiz"); // navigate to the page of choosing topics
     }else{
       questions[index]["prevIndex"] = currentQuestionIndex ;
@@ -180,14 +178,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    if (topic == "" &&  !(ModalRoute.of(context)!.settings.arguments==null)){
-      data = ModalRoute.of(context)!.settings.arguments;
-      topic = data!["ChoosedTopic"];
-      uid = data!["uid"];
-      getData("Video games");
-    }
-
-
     // Retrieve arguments
     return !isLoaded ?const Loading() : Scaffold(
       appBar: AppBar(

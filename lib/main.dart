@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:quizart/firebase_options.dart';
 import 'package:quizart/screens/QuizChoose.dart';
-import 'package:quizart/screens/home.dart';
 import 'package:quizart/screens/home_page.dart';
 import 'package:quizart/screens/laoding.dart';
 import 'package:quizart/screens/user_info_form.dart';
@@ -32,7 +31,6 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => const HomePage(),
         '/loading':(context) => const Loading(),
         "/quiz" : (context) => const QuizChoose(),
-        "/home" : (context) => const Home(),
         '/user_info_form': (context) => const UserInfoForm(),
         '/signin': (context) => const UserSignIn(), // Route to UserInfoForm
       },
