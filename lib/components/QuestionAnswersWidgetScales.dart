@@ -16,28 +16,38 @@ class QuestionAnswersWidgetScales extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.1),
+
       child: Column(
+
+
         crossAxisAlignment: CrossAxisAlignment.center,
         children: List.generate(answers.length, (index) {
+
           return Row(
+
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 answers[index],
-                style: const TextStyle(fontSize: 18.0), // Increase font size
+                style: const TextStyle(fontSize: 20.0, fontFamily: 'Lexend'), // Increase font size
               ),
-              Slider(
-                value: SelectedAnswers[answers[index]]?.toDouble() ?? Scale[0].toDouble()!,
-                min: Scale[0].toDouble()!,
-                max: Scale[1].toDouble()!,
-                divisions: Scale[1]!,
-                onChanged: (value) {
-                  onScaleValueSelected(answers[index], value.toInt());
-                },
-                activeColor: const Color(0xFFBB2649),
+              Expanded(
+
+                child: Slider(
+                      value: SelectedAnswers[answers[index]]?.toDouble() ?? Scale[0].toDouble()!,
+                      min: Scale[0].toDouble()!,
+                      max: Scale[1].toDouble()!,
+                      divisions: Scale[1]!,
+                      onChanged: (value) {
+                        onScaleValueSelected(answers[index], value.toInt());
+                      },
+                      activeColor: const Color(0xFF032174),
+                    ),
               ),
-              const SizedBox(
+            const SizedBox(
                 width:10,
               ),
               Container(
@@ -53,8 +63,8 @@ class QuestionAnswersWidgetScales extends StatelessWidget {
                 child: Text(
                     SelectedAnswers[answers[index]]!.toString(),
                     style: const TextStyle(
-                      fontFamily: "lato",
-                      color: Colors.cyan,
+                      fontFamily: 'Lexend',
+                      color: Colors.blueAccent,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),

@@ -96,6 +96,10 @@ flutter:
         - asset: assets/fonts/Lato-Light.ttf
         - asset: assets/fonts/Lato-Regular.ttf
         - asset: assets/fonts/Lato-Thin.ttf
+       
+    - family: Lexend
+      fonts:
+        - asset: fonts/Lexend-Regular.ttf
     - family: PressStart2P
       fonts:
         - asset: assets/fonts/PressStart2P.ttf

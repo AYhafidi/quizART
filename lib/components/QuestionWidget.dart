@@ -13,12 +13,16 @@ class QuestionWidget extends StatelessWidget {
         child: Text(
           text,
           style: const TextStyle(
-            fontSize: 21.0,
-            fontWeight: FontWeight.bold,
+            fontSize: 24.0,
+
+            fontFamily: 'Lexend',
+            color: Color(0xFF262626),
+
           ),
           textAlign: TextAlign.center, // Center the text
         ),
       ),
+
     );
   }
 }
