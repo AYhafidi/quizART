@@ -11,7 +11,7 @@ class CardWidget extends StatelessWidget {
     required this.size,
     this.borderRadius =10,
     this.fontSize = 20,
-    this.fontFamily = "lato",
+    this.fontFamily = "Lexend",
     this.choosed = false,
 });
 

@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
       "text": "for how long have you been playing",
       "is_linked": false,
       "type": "scale",
-      "answers": ["years"],
+      "answers": ["years", "months", "days", "hours", "just started"],
       "scale": [1, 20],
       "nextIndex": "5"
     },
@@ -181,21 +181,84 @@ class _HomeState extends State<Home> {
     // Retrieve arguments
     return !isLoaded ?const Loading() : Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyanAccent,
+        backgroundColor: Color(0xFF032174),
         centerTitle: true,
-        title: const Text("Helllllllllllllllo"),
+        title: const Text("PollART", style: TextStyle(fontSize: 18.0, fontFamily: 'Lexend',color: Colors.white)),
       ),
       body: Center(
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              QuestionWidget(text: questions[currentQuestionIndex]["text"]),
-              getWidget(questions[currentQuestionIndex]["type"]),
-              BottomPageWidget(goToPreviousQuestion: goToPreviousQuestion, goToNextQuestion: goToNextQuestion)
-            ]
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 25),
+            const Center(
+              child: Icon(
+                Icons.poll,
+                size: 65.0,
+                color: Colors.blueAccent, // Set the color to magenta
+              ),
+            ),
+
+            QuestionWidget(text: questions[currentQuestionIndex]["text"]),
+            getWidget(questions[currentQuestionIndex]["type"]),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin:
+              EdgeInsets.only(bottom: 5.0), // Adjust the value as needed
+              child: ClipOval(
+                child: Material(
+                  color: Color(0xFF032174),
+                  child: InkWell(
+                    splashColor: Colors.blueAccent,
+                    onTap: goToPreviousQuestion,
+                    child: const SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 22.0,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 60),
+            Container(
+              margin:
+              EdgeInsets.only(bottom: 5.0), // Adjust the value as needed
+              child: ClipOval(
+                child: Material(
+                  color: Color(0xFF032174),
+                  child: InkWell(
+                    splashColor: Colors.blueAccent,
+                    onTap: goToNextQuestion,
+                    child: const SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: 22.0,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
+
+
+
   }
 }
 
