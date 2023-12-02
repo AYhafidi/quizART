@@ -71,5 +71,5 @@ flutter {
 }
 
 dependencies {
-    implementation 'com.airbnb.android:lottie:3.6.1'
+    implementation 'com.airbnb.android:lottie:6.2.0'
 }

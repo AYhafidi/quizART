@@ -162,7 +162,7 @@ class QuizChooseState extends State<QuizChoose> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: Lottie.asset(
-                                    '$topic.json',
+                                    'Json/$topic.json',
                                     fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
                                   ),
                                 ),

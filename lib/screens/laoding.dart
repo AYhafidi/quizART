@@ -33,13 +33,13 @@ class _LoadingState extends State<Loading> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children:[
-            Lottie.asset(
-            'Loading1.json',
+            Lottie.network(
+            'https://lottie.host/dc3504c4-60a6-4617-b6b8-c5a170f85421/4EoZU5taUr.json',
             fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
            ),
 
             Lottie.asset(
-              'Loading2.json',
+              'Json/Loading2.json',
               fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
             ),
           ]
