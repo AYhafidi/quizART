@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:lottie/lottie.dart';
 import 'package:quizart/services/database.dart';
 
 class Loading extends StatefulWidget {
@@ -20,14 +20,6 @@ class _LoadingState extends State<Loading> {
     //db.addQuestions("data.json");
   }
 
-  void _moveBox() {
-    setState(() {
-      height = screenHeight;
-      width = screenWidth;
-      boxX = 100; // Changing the alignment value to animate box movement
-      boxY = 100; // Changing the alignment value to animate box movement
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +27,24 @@ class _LoadingState extends State<Loading> {
     screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: GestureDetector(
-        onTap: _moveBox,
-        child: AnimatedContainer(
-            duration: const Duration(seconds: 1),
-            color: Colors.cyanAccent,
-            width: width,
-            height: height,
-            margin: EdgeInsets.only(left: boxX, top: boxY), // Use margin to position the container
-          ),
-      ),
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children:[
+            Lottie.asset(
+            'Loading1.json',
+            fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
+           ),
+
+            Lottie.asset(
+              'Loading2.json',
+              fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
+            ),
+          ]
+        ),
+      )
     );
   }
 }

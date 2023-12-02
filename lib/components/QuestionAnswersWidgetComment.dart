@@ -34,6 +34,9 @@ class QuestionAnswersWidgetComment extends StatelessWidget {
       ),
     );
     return Container(
+        margin: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.05),
+
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -42,11 +45,22 @@ class QuestionAnswersWidgetComment extends StatelessWidget {
               ReboundUpdateComment(value);
               },
             controller: _controller,
-            maxLines: 4,
+            maxLines: 5,
             decoration: const InputDecoration(
-            labelText: 'Your Comment',
-            border: OutlineInputBorder(),
-          ),
+              hintText: 'Type your heart out !',
+              hintStyle: TextStyle(
+                color: Colors.grey,
+                fontSize: 20.0,
+                fontFamily: 'Lexend',
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xFF032174),
+                  width: 1.0,
+                ),
+                // Set the color you want
+              ),
+            ),
         ),
         const SizedBox(height: 16.0),
     ],

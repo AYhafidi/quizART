@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:csc_picker/csc_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quizart/screens/QuizChoose.dart';
 import 'package:quizart/services/toast.dart';
 import 'package:quizart/services/database.dart';
-
 import 'package:quizart/services/auth.dart';
+
+
+
 class UserInfoForm extends StatefulWidget {
   const UserInfoForm({super.key});
 
@@ -37,6 +40,7 @@ class _UserInfoFormState extends State<UserInfoForm> {
     _phoneController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,9 +180,13 @@ class _UserInfoFormState extends State<UserInfoForm> {
           "State" : selectedState,
           "City" : selectedCity,
         });
-        Navigator.pushReplacementNamed(context, "/quiz",  arguments: {
-          "uid" :  user.uid,
-        },);
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizChoose(uid: user.uid),
+          ),
+        );
       }else{
         showToast(message:"not registered!");
       }

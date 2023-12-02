@@ -17,22 +17,48 @@ class QuestionAnswersWidgetMCQ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.05
+      ),
       child: Column(
         children: List.generate(answers.length, (index) {
-          return Row(
-            children: [
-              Checkbox(
-                value: SelectedAnswers[answers[index]],
-                onChanged: (value) {
-                  onMCQAnswerSelected(answers[index], value!);
-                },
-                activeColor: const Color(0xFFBB2649),
+          bool isSelected = SelectedAnswers[answers[index]] == true;
+
+          return GestureDetector(
+            onTap: () {
+              onMCQAnswerSelected(answers[index] ,!isSelected);
+            },
+            child: Container(
+              margin: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: isSelected ? const Color(0xFFBB2649) : Colors.white,
+                borderRadius: BorderRadius.circular(13.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
-              Text(
-                answers[index],
-                style: const TextStyle(fontSize: 18.0), // Increase font size
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 18.0, horizontal: 16.0),
+                child: Row(
+                  children: [
+                    Text(
+                      answers[index],
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontFamily: 'Lexend',
+                        color: isSelected ? Colors.white : Colors.grey[800],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ],
+            ),
           );
         }),
       ),

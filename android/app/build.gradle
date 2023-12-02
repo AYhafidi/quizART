@@ -70,4 +70,6 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation 'com.airbnb.android:lottie:3.6.1'
+}
