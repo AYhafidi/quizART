@@ -1,0 +1,344 @@
+{
+  "title": "Education",
+  "Questions": {
+    "1": {
+      "is_linked": true,
+      "text": "Do you play or develop video games?",
+      "answers": ["Playing", "Development"],
+      "type": "dichotomous",
+      "nextIndex": { "Playing": "2", "Development": "25" }
+    },
+    "2": {
+      "is_linked": true,
+      "text": "Which type do you prefer?",
+      "answers": ["Online Games", "Offline Games"],
+      "type": "dichotomous",
+      "nextIndex": { "Online Games": "3", "Offline Games": "12" }
+    },
+    "3": {
+      "is_linked": false,
+      "text": "Rank these games per order of preference?",
+      "answers": ["Action", "RPG", "Shooter", "MOBA", "Battle Royale", "Strategy", "Simulation", "Sports"],
+      "type": "rank",
+      "nextIndex": "4"
+    },
+    "4": {
+      "is_linked": true,
+      "text": "Have you ever participated in online gaming competitions or tournaments?",
+      "answers": ["Yes", "No"],
+      "type": "dichotomous",
+      "nextIndex": { "Yes": "5", "No": "6" }
+    },
+    "5": {
+      "is_linked": false,
+      "text": "what the name of the competition",
+      "type": "comment",
+      "nextIndex": "7"
+    },
+    "6": {
+      "is_linked": true,
+      "text": "On which gaming platforms do you primarily play online games?",
+      "answers": ["PC", "Game Consoles", "Mobile"],
+      "type": "dichotomous",
+      "nextIndex": { "PC": "8", "Game Consoles": "9", "Mobile": "10" }
+    },
+    "7": {
+      "is_linked": false,
+      "text": "whitch game u playes during the competition",
+      "type": "comment",
+      "nextIndex": "6"
+    },
+    "8": {
+      "is_linked": false,
+      "text": "What are your expectations for the future of PC games?",
+      "type": "comment",
+      "nextIndex": "11"
+    },
+    "9": {
+      "is_linked": false,
+      "text": "What are your expectations for the future of gaming consoles?",
+      "type": "comment",
+      "nextIndex": "11"
+    },
+    "10": {
+      "is_linked": false,
+      "text": "What are your expectations for the future of mobile games?",
+      "type": "comment",
+      "nextIndex": "11"
+    },
+    "11": {
+      "is_linked": false,
+      "text": "What are your expectations for the future of mobile games?",
+      "type": "comment",
+      "nextIndex": "-1"
+    },
+    "12": {
+      "text": "for how long have you been playing",
+      "is_linked": false,
+      "type": "scale",
+      "answers": ["years"],
+      "scale": [1, 20],
+      "nextIndex": "13"
+    },
+    "13": {
+      "is_linked": true,
+      "text": "which mode do you prefer ?",
+      "answers": ["solo", "multiplayer"],
+      "type": "dichotomous",
+      "nextIndex": { "solo": "14", "multiplayer": "15" }
+    },
+    "14": {
+      "is_linked": false,
+      "text": "could you rank these games ?",
+      "answers": [
+        "The Witcher 3: Wild Hunt",
+        "Dark Souls series",
+        "Stardew Valley",
+        "The Legend of Zelda: Breath of the Wild",
+        "Sekiro: Shadows Die Twice"
+      ],
+      "type": "rank",
+      "nextIndex": "16"
+    },
+    "16": {
+      "is_linked": false,
+      "text": "name your favourite game ?",
+      "type": "comment",
+      "nextIndex": "19"
+    },
+    "19": {
+      "text": "what is the highest rank you have reached",
+      "is_linked": false,
+      "type": "scale",
+      "answers": ["level"],
+      "scale": [1, 1000],
+      "nextIndex": "17"
+    },
+    "15": {
+      "is_linked": true,
+      "text": "Do you prefer competitive or cooperative multiplayer games?",
+      "type": "dichotomous",
+      "answers": ["Competitive", "Cooperative"],
+      "nextIndex": { "Competitive": "17", "Cooperative": "18" }
+    },
+    "17": {
+      "is_linked": true,
+      "text": "have you ever participated in a competition?",
+      "type": "dichotomous",
+      "answers": ["Yes", "No"],
+      "nextIndex": { "Yes": "20", "No": "21" }
+    },
+    "18": {
+      "is_linked": true,
+      "text": "do you like solving puzzles?",
+      "type": "dichotomous",
+      "answers": ["Yes", "No"],
+      "nextIndex": { "Yes": "22", "No": "21" }
+    },
+    "20": {
+      "is_linked": false,
+      "text": "what is the name of the compitition ?",
+      "type": "comment",
+      "nextIndex": "23"
+    },
+    "21": {
+      "is_linked": false,
+      "text": "what is your favourite platforme ?",
+      "type": "comment",
+      "nextIndex": "24"
+    },
+    "22": {
+      "is_linked": false,
+      "text": "what is your favourite cooperative game ?",
+      "type": "comment",
+      "nextIndex": "21"
+    },
+    "23": {
+      "is_linked": false,
+      "text": "what is the name of the games ?",
+      "type": "comment",
+      "nextIndex": "21"
+    },
+    "24": {
+      "is_linked": false,
+      "text": "for you what is playing ?",
+      "type": "comment",
+      "nextIndex": "-1"
+    },
+    "25": {
+      "is_linked": true,
+      "text": "what's your role in game developpemt ?",
+      "answers": ["game designe", "programmer"],
+      "type": "dichotomous",
+      "nextIndex": { "game designe": "26", "programmer": "27" }
+    },
+    "26": {
+      "is_linked": false,
+      "text": "rank the types of games do you enjoy designing ?",
+      "answers": ["Story-driven", "Puzzle","Open-world","Other"],
+      "type": "rank",
+      "nextIndex": "28"
+    },
+    "27": {
+      "is_linked": false,
+      "text": "rank the types of games do you enjoy programming ?",
+      "answers": ["Story-driven", "Puzzle","Open-world","Other"],
+      "type": "rank",
+      "nextIndex": "29"
+    },
+    "28": {
+      "is_linked": true,
+      "text": "Where did you learn game designing  ?",
+      "answers": ["school", "online courses","randomy('friends,youtube,internet,books...')"],
+      "type": "dichotomous",
+      "nextIndex": { "school": "30", "online courses": "31", "randomy('friends,youtube,internet,books...')": "32"}
+    },
+    "29": {
+      "is_linked": true,
+      "text": "What development tools do you frequently use ?",
+      "answers": ["unity", "online courses", "Other"],
+      "type": "dichotomous",
+      "nextIndex": { "unity": "33", "online courses": "34", "Other": "35"}
+    },
+    "30": {
+      "is_linked": false,
+      "text": "what's your school name ?",
+      "type":"comment",
+      "nextIndex":"36"
+    },
+    "31": {
+      "is_linked": false,
+      "text": "what the name of the online courses you had ?",
+      "type":"comment",
+      "nextIndex":"36"
+    },
+    "32": {
+      "is_linked": false,
+      "text": "can you specify more ?",
+      "type":"comment",
+      "nextIndex":"36"
+    },
+    "33": {
+      "is_linked": false,
+      "text": "What type of projects do you usually work on ?",
+      "answers": ["2D Games", "3D Games", "Virtual Reality (VR)","Augmented Reality (AR)","Other"],
+      "type":"dichotomous",
+      "nextIndex":"37"
+    },
+    "34": {
+      "is_linked": false,
+      "text": "What type of projects do you usually work on ?",
+      "answers": ["Blueprints", "C++ Programming", "Level Design","Animation","Other"],
+      "type":"dichotomous",
+      "nextIndex":"37"
+    },
+    "35": {
+      "is_linked": false,
+      "text": "can you specify more ? ",
+      "type":"comment",
+      "nextIndex":"37"
+    },
+    "36": {
+      "is_linked": false,
+      "text": "how many years you have been game designing ?",
+      "type": "scale",
+      "answers": ["years"],
+      "scale": [1, 50],
+      "nextIndex":"38"
+    },
+    "37": {
+      "is_linked": false,
+      "text": "rank programming languages do you use the most ?",
+      "answers": ["C++", "C#", "Python","Java","JavaScript","Other"],
+      "type":"rank",
+      "nextIndex":"39"
+    },
+    "38": {
+      "is_linked": true,
+      "text": "do you have any online certificat ?",
+      "answers": ["Yes", "No"],
+      "type":"dichotomous",
+      "nextIndex":{ "Yes": "40", "No": "46" }
+    },
+    "39": {
+      "is_linked": true,
+      "text": "where did you learn game developpment ?",
+      "answers": ["school", "online courses","randomy('friends,youtube,internet,books...')"],
+      "type":"dichotomous",
+      "nextIndex":  { "school": "41", "online courses": "42", "randomy('friends,youtube,internet,books...')": "43"}
+    },
+    "40": {
+      "is_linked": false,
+      "text": "witch platform you got your online certificat ? ",
+      "type":"comment",
+      "nextIndex":"44"
+    },
+    "41": {
+      "is_linked": false,
+      "text": "what's your school name ?",
+      "type":"comment",
+      "nextIndex":"45"
+    },
+    "42": {
+      "is_linked": false,
+      "text": "what the name of the online courses you had ?",
+      "type":"comment",
+      "nextIndex":"45"
+    },
+    "43": {
+      "is_linked": false,
+      "text": "can you specify more ?",
+      "type":"comment",
+      "nextIndex":"45"
+    },
+    "44": {
+      "is_linked": false,
+      "text": "what's the name of the certificat you got ",
+      "type":"comment",
+      "nextIndex":"46"
+    },
+    "45": {
+      "is_linked": true,
+      "text": "do you have any online certificat ?",
+      "answers": ["Yes", "No"],
+      "type":"dichotomous",
+      "nextIndex":{ "Yes": "47", "No": "49" }
+    },
+    "46": {
+      "text": "on a scale of 1 to 20,rate your skills on games desing",
+      "is_linked": false,
+      "type": "scale",
+      "answers": ["rate"],
+      "scale": [1, 20],
+      "nextIndex": "-1"
+    },
+    "47": {
+      "is_linked": false,
+      "text": "witch platform you got your online certificat ? ",
+      "type":"comment",
+      "nextIndex":"48"
+    },
+    "48": {
+      "is_linked": false,
+      "text": "what's the name of the certificat you got ",
+      "type":"comment",
+      "nextIndex":"49"
+    },
+    "49": {
+      "is_linked": false,
+      "text": " how many years you have been game developping ?",
+      "type": "scale",
+      "answers": ["years"],
+      "scale": [1, 50],
+      "nextIndex":"50"
+    },
+    "50": {
+      "text": "on a scale of 1 to 20,rate your skills on games developping",
+      "is_linked": false,
+      "type": "scale",
+      "answers": ["rate"],
+      "scale": [1, 20],
+      "nextIndex": "-1"
+    }
+  }
+}

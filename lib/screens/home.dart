@@ -25,7 +25,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   Map questions = {}; // questions that we got from the database
-  Map<String, dynamic> answers = {};    // list of client answers
+  Map<String, dynamic> answers = {};
   bool isLoaded = false;   // true if we got the questions without problems
   String currentQuestionIndex = "1"; // Index of the current question
   DataBaseService db = DataBaseService();
