@@ -141,6 +141,28 @@ class DataBaseService{
     }
   }
 
+  Future<String?> getQuestionText(String topic, String index) async {
+    try {
+      // Query the collection based on the provided topic and questions index
+      var querySnapshot = await questionCollection
+          .where('title', isEqualTo: topic)
+          .where('questions.$index', isNotEqualTo: null)
+          .limit(1)
+          .get();
 
+      // Check if any documents match the query
+      if (querySnapshot.docs.isNotEmpty) {
+        // Retrieve the text of the question
+        String questionText = querySnapshot.docs[0]['questions'][index]['text'];
+        return questionText;
+      }
+
+      // If the question is not found, return null or a default value
+      return null;
+    } catch (e) {
+      print('Erreur lors de la récupération du texte de la question : $e');
+      throw e; // You can handle the error appropriately here
+    }
+  }
 
 }
