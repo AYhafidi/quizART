@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue, // Set a background color that fits your splash screen design
+      backgroundColor: const Color.fromRGBO(109, 114, 224,1),// Set a background color that fits your splash screen design
       body: Center(
         child: AnimatedSplashScreen(
           duration: 3000,
