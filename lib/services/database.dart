@@ -75,16 +75,17 @@ class DataBaseService{
     // Get docs from collection reference
     String jsonString = await rootBundle.loadString(File);
     Map<String, dynamic> data = jsonDecode(jsonString);
-    questionCollection.add({"title" : data["title"], "Questions":data["Questions"]}); // <-- Set merge to true.
+    questionCollection.add(data); 
   }
 
 
-                            /* put response in the database*/
+                            
   Future<void> addUserinformation(String id, Map<String, dynamic> information) async {
     // Get docs from collection reference
     usersCollection.doc(id).set(information, SetOptions(merge: true)); // <-- Set merge to true.
   }
-
+  
+                                /* put response in the database*/
   Future<void> addUserResponse(String id, String title, Map<String, dynamic> data) async {
     try {
       // Create a map with the quizId as key and the quizData as value

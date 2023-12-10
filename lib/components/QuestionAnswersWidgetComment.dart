@@ -13,15 +13,13 @@ class QuestionAnswersWidgetComment extends StatelessWidget {
   Timer _timer = Timer(const Duration(milliseconds: 0), (){});
 
 
-  void ReboundUpdateComment(String text){
+  void updateComment(String text){
     if (_timer.isActive) {
       _timer.cancel();
     }
     _timer = Timer(const Duration(milliseconds: 500), (){
       onCommentSubmitted(text);
     });
-
-
   }
 
   @override
@@ -42,7 +40,7 @@ class QuestionAnswersWidgetComment extends StatelessWidget {
           children: [
           TextField(
             onChanged: (value){
-              ReboundUpdateComment(value);
+              updateComment(value);
               },
             controller: _controller,
             maxLines: 5,

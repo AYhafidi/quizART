@@ -15,7 +15,7 @@ class UserSignIn extends StatefulWidget {
 }
 
 class _UserSignInState extends State<UserSignIn> {
-  bool _connected = false;
+  
   final AuthentService _auth = AuthentService();
 
   final TextEditingController _emailController = TextEditingController();
@@ -112,43 +112,35 @@ class _UserSignInState extends State<UserSignIn> {
     );
   }
 
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email requis';
-    }
-    if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
-        .hasMatch(value)) {
-      return 'Email invalide';
-    }
-    return null;
+String? _validateEmail(String? value) =>
+    value?.isEmpty ?? true
+        ? 'Email requis'
+        : !RegExp(r"^[ a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$").hasMatch(value!)
+            ? 'Email invalide'
+            : null;
+
+
+void _submitFormSignIn() async {
+  if (_formKey.currentState?.validate() ?? false) {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    final user = await _auth.SignIn(email, password);
+
+    user != null
+        ? _handleSuccessfulSignIn(user)
+        : showToast(message: "not registered!");
   }
+}
 
+void _handleSuccessfulSignIn(User user) {
+  showToast(message: "user connected");
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => QuizChoose(uid: user.uid),
+    ),
+  );
+}
 
-  void _submitFormSignIn() async{
-    if (_formKey.currentState?.validate() ?? false) {
-      // Form is valid, handle form submission here
-      setState((){
-        _connected = true;
-      });
-      String email = _emailController.text;
-      String password = _passwordController.text;
-
-      User? user = await _auth.SignIn(email, password);
-
-      setState((){
-        _connected= false;
-      });
-      if(user != null){
-        showToast(message:"user connected");
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => QuizChoose(uid: user.uid),
-          ),
-        );
-      }else{
-        showToast(message:"not registered!");
-      }
-    }
-  }
 }

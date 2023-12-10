@@ -18,7 +18,6 @@ class UserInfoForm extends StatefulWidget {
 
 class _UserInfoFormState extends State<UserInfoForm> {
   final AuthentService _auth = AuthentService();
-  bool _registered = false;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -71,11 +70,6 @@ class _UserInfoFormState extends State<UserInfoForm> {
                     hintText: 'Numéro de téléphone',
                   ),
 
-
-                  // initialCountryCode: _getCountryCode(),
-                  // onChanged: (phone) {
-                  //   // Handle phone number changes
-                  // },
                 ),
 
               ),
@@ -151,9 +145,6 @@ class _UserInfoFormState extends State<UserInfoForm> {
 
     if (_formKey.currentState?.validate() ?? false) {
       // Form is valid, handle form submission here
-      setState((){
-       _registered = true;
-          });
       String name = _nameController.text;
       String age = _ageController.text;
       String phoneNumber = _phoneController.text;
@@ -167,9 +158,6 @@ class _UserInfoFormState extends State<UserInfoForm> {
 
 
       User? user = await _auth.Register(email, password);
-      setState((){
-        _registered = false;
-      });
       if(user != null){
         showToast(message:"user registered");
         db.addUserinformation(user.uid, {

@@ -34,7 +34,6 @@ class _HomeState extends State<Home> {
   initState()  {         // this is called when the class is initialized or called for the first time
     super.initState(); //  this is the material super constructor for init state to link your instance initState to the global initState context
     getData(widget.topic);
-    //prepareResponses();
   }
 
   void getData(String topic) async {
@@ -46,19 +45,12 @@ class _HomeState extends State<Home> {
     prepareResponses();
   }
 
-  Map listToMap(List array){
-    Map map = Map.fromEntries(
-      array.asMap().entries.map((entry) => MapEntry(entry.key.toString(), entry.value)),
-    );
-
-    return map;
-  }
-
-
-
   void goToNextQuestion() {
-    String index = questions[currentQuestionIndex]["is_linked"] ? questions[currentQuestionIndex]["nextIndex"][answers[currentQuestionIndex]] : questions[currentQuestionIndex]["nextIndex"];
-    if (index == "-1") {
+    String index = questions[currentQuestionIndex]["is_linked"] ?
+        questions[currentQuestionIndex]["nextIndex"][answers[currentQuestionIndex]] 
+        : questions[currentQuestionIndex]["nextIndex"];
+
+    if (index == "-1") { // La dernière question dans la branche
       db.addUserResponse(widget.uid, widget.topic, answers);
       Navigator.pushReplacement(
         context,
@@ -67,7 +59,7 @@ class _HomeState extends State<Home> {
         ),
       );
     }else{
-      questions[index]["prevIndex"] = currentQuestionIndex ;
+      questions[index]["prevIndex"] = currentQuestionIndex ; // Garder l'indice de la question d'avant 
       setState(() {
         currentQuestionIndex = index;
       });
@@ -80,7 +72,9 @@ class _HomeState extends State<Home> {
 
   void goToPreviousQuestion() {
     setState(() {
-      currentQuestionIndex = questions[currentQuestionIndex]["prevIndex"] == -1 ? currentQuestionIndex : questions[currentQuestionIndex]["prevIndex"];
+      currentQuestionIndex = questions[currentQuestionIndex]["prevIndex"] == -1 ?
+          currentQuestionIndex 
+          : questions[currentQuestionIndex]["prevIndex"];
     });
 
   }
@@ -100,28 +94,50 @@ class _HomeState extends State<Home> {
   void onOrderValueSelected(List qAnswers){
 
     setState(() {
-      answers[currentQuestionIndex] = listToMap(qAnswers) ;
+      answers[currentQuestionIndex] = qAnswers ;
     });
   }
 
   Widget getWidget(String type){
     switch(type){
       case "dichotomous":
-        return QuestionAnswersWidgetDichotomous(answers: questions[currentQuestionIndex]["answers"] , selectedAnswer: answers[currentQuestionIndex] , onDichotomousAnswerSelected: onDichotomousCommentAnswerSelected);
+        return QuestionAnswersWidgetDichotomous(
+              answers: questions[currentQuestionIndex]["answers"] 
+              , selectedAnswer: answers[currentQuestionIndex] 
+              , onDichotomousAnswerSelected: onDichotomousCommentAnswerSelected
+          );
       case "qcm":
-        return QuestionAnswersWidgetMCQ(answers: questions[currentQuestionIndex]["answers"] ?? ["Doesn't work $currentQuestionIndex"], SelectedAnswers: answers[currentQuestionIndex]!, onMCQAnswerSelected: onAnswerSelected);
+        return QuestionAnswersWidgetMCQ(
+          answers: questions[currentQuestionIndex]["answers"]
+          , SelectedAnswers: answers[currentQuestionIndex]!,
+          onMCQAnswerSelected: onAnswerSelected
+          );
       case "scale":
-        return QuestionAnswersWidgetScales(Scale: questions[currentQuestionIndex]["scale"] ?? ["Doesn't work $currentQuestionIndex"], answers: questions[currentQuestionIndex]["answers"], SelectedAnswers: answers[currentQuestionIndex]!, onScaleValueSelected: onAnswerSelected);
+        return QuestionAnswersWidgetScales(
+              Scale: questions[currentQuestionIndex]["scale"],
+              answers: questions[currentQuestionIndex]["answers"],
+              SelectedAnswers: answers[currentQuestionIndex]!,
+              onScaleValueSelected: onAnswerSelected
+              );
       case "rank":
-        return QuestionAnswersWidgetRanking(selectedOrderValues: answers[currentQuestionIndex]!.values.toList(), onOrderValueSelected: onOrderValueSelected);
+        return QuestionAnswersWidgetRanking(
+              selectedOrderValues: answers[currentQuestionIndex]
+              , onOrderValueSelected: onOrderValueSelected
+              );
       case "comment":
-        return QuestionAnswersWidgetComment(comment: answers[currentQuestionIndex], onCommentSubmitted: onDichotomousCommentAnswerSelected);
+        return QuestionAnswersWidgetComment(
+              comment: answers[currentQuestionIndex],
+              onCommentSubmitted: onDichotomousCommentAnswerSelected
+              );
       case "image":
-        return QuestionAnswersWidgetImage(answers: questions[currentQuestionIndex]["answers"], selectedAnswers: answers[currentQuestionIndex]!, onImageAnswerSelected: onAnswerSelected);
+        return QuestionAnswersWidgetImage(
+              answers: questions[currentQuestionIndex]["answers"],
+              selectedAnswers: answers[currentQuestionIndex]!,
+              onImageAnswerSelected: onAnswerSelected
+          );
       default :
         return const Text("Nothing found !!");
     }
-
   }
 
   void prepareResponses(){
@@ -133,11 +149,11 @@ class _HomeState extends State<Home> {
       case "image":
         questions[currentQuestionIndex]["answers"].forEach((element) => answers[currentQuestionIndex]![element]=false);
       case "scale":
-        questions[currentQuestionIndex]["answers"].forEach((element) => answers[currentQuestionIndex]![element]= questions[currentQuestionIndex]["scale"][0]);
+        questions[currentQuestionIndex]["answers"].forEach((element) =>
+              answers[currentQuestionIndex]![element]= questions[currentQuestionIndex]["scale"][0]);
+
       case "rank":
-        //answers[currentQuestionIndex] = questions[currentQuestionIndex]["answers"].asMap();
-        questions[currentQuestionIndex]["answers"].asMap().forEach((index, element) => answers[currentQuestionIndex]![index.toString()] = element );
-        //print(answers[currentQuestionIndex]);
+        answers[currentQuestionIndex] = questions[currentQuestionIndex]["answers"];
       case "comment":
         answers[currentQuestionIndex] = "";
     }

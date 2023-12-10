@@ -40,7 +40,7 @@ class QuestionAnswersWidgetScales extends StatelessWidget {
                       value: SelectedAnswers[answers[index]]?.toDouble() ?? Scale[0].toDouble()!,
                       min: Scale[0].toDouble()!,
                       max: Scale[1].toDouble()!,
-                      divisions: Scale[1]!,
+                      divisions: Scale[1]-Scale[0]+1,
                       onChanged: (value) {
                         onScaleValueSelected(answers[index], value.toInt());
                       },

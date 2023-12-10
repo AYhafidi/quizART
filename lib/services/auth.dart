@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quizart/services/toast.dart';
+
 class AuthentService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -12,7 +13,7 @@ class AuthentService {
     });
   }
 //Inscription
-Future<User?>  Register (String email, String password) async{
+Future<User?> Register (String email, String password) async{
 try {
   UserCredential cred = await _auth.createUserWithEmailAndPassword(email: email,password:password);
   return cred.user;

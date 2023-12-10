@@ -14,7 +14,6 @@ class QuestionWidget extends StatelessWidget {
           text,
           style: const TextStyle(
             fontSize: 24.0,
-
             fontFamily: 'Lexend',
             color: Color(0xFF262626),
 

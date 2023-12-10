@@ -9,20 +9,6 @@ import 'package:lottie/lottie.dart';
 
 
 
-class Survey {
-  String name;
-  String image;
-  IconData icon;
-
-  Survey({
-    required this.name,
-    required this.image,
-    required this.icon,
-  });
-
-
-}
-
 class QuizChoose extends StatefulWidget {
   final String uid;
   QuizChoose({Key? key, required this.uid}) : super(key: key);
@@ -35,11 +21,8 @@ class QuizChooseState extends State<QuizChoose> {
   DataBaseService db = DataBaseService();
   late Future<List<dynamic>> info;
 
-  // 'https://mediakwest.com/wp-content/uploads/2019/07/1_Beaugrenelle.ONYX-c-Fr%C3%A9d%C3%A9ric-Berthet.HD_.006.jpg',
-
-
-  IconData topicIcon(String icon){
-    switch(icon){
+  IconData topicIcon(String topic){
+    switch(topic){
       case "Education":
         return Icons.book;
       case "Gaming":
@@ -48,6 +31,21 @@ class QuizChooseState extends State<QuizChoose> {
         return Icons.theater_comedy ;
       default:
         return Icons.poll;
+    }
+  }
+
+  String topicLottie(String topic){
+    switch(topic){
+      case "Education":
+        return "https://lottie.host/975f4dee-d9a1-43cc-b1f3-e7ab848768bf/egm1ImyvXk.json";
+      case "Gaming":
+        return "https://lottie.host/2b4fa19a-8677-473b-99ad-8c76e39b9ae5/vHxkaDV3nU.json";
+      case "Cinema":
+        return "https://lottie.host/3ef34fbc-805a-4d92-8819-c1b26cd4ed47/g7mekcAYaN.json" ;
+      case "Art":
+        return "https://lottie.host/c11da15c-bbff-47c5-b9ee-290996bf9285/IdWN17BKoU.json";
+      default:
+        return "https://lottie.host/421aace8-ae32-44ec-9d23-c6c9dc281dbc/c7udAJiEMn.json";
     }
   }
 
@@ -63,23 +61,8 @@ class QuizChooseState extends State<QuizChoose> {
 
 
   Future<List<dynamic>> getInfo() async {
-    String uid = widget.uid;
-    // Call func_2 with the result of func_1 and await its result
-    await Future.delayed(const Duration(seconds: 2), () {
-      return '';
-    });
 
-    List<dynamic> userTopics = await getUserTopics(uid);
-
-
-    // Call func_3 and await its result
-    List<dynamic> topics = await getTopics();
-
-    // Combine all results into one list
-    List<dynamic> combinedResults = [topics, userTopics, uid];
-
-
-    return combinedResults;
+    return  [await getTopics(), await getUserTopics(widget.uid) ];
   }
 
   @override
@@ -89,13 +72,14 @@ class QuizChooseState extends State<QuizChoose> {
     super.initState();
     info = getInfo();
   }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: info,
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
-          return const Loading(); // Assuming Loading() is a widget for showing loading state
+          return const Loading(); 
         } else if (snapshot.hasError) {
           final error = snapshot.error;
           return Text("Error has occurred: $error");
@@ -104,7 +88,8 @@ class QuizChooseState extends State<QuizChoose> {
             List<dynamic> data = snapshot.data!;
             List<dynamic> topics = data[0]; // all available topics
             List<dynamic> userTopics = data[1]; // topics that the user has already answered to
-            String uid = data[2];
+            String uid = widget.uid;
+            
 
             return Scaffold(
               appBar: AppBar(
@@ -161,8 +146,8 @@ class QuizChooseState extends State<QuizChoose> {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
-                                  child: Lottie.asset(
-                                    'Json/$topic.json',
+                                  child: Lottie.network(
+                                    topicLottie(topic),
                                     fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
                                   ),
                                 ),
@@ -185,29 +170,28 @@ class QuizChooseState extends State<QuizChoose> {
                   ),
                   Expanded(
                     flex: 4,
-                    child: Container(
-                      child: ListView.builder(
-                        itemCount: topics.length,
-                        itemBuilder: (BuildContext context, int index) => GestureDetector(
-                          onTap: (){
-                            if( ! userTopics.contains(topics[index])){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Home(topic: topics[index], uid: uid),
-                                ),
-                              );
-                            }
+                    child: ListView.builder(
+                      itemCount: topics.length,
+                      itemBuilder: (BuildContext context, int index) => GestureDetector(
+                        onTap: (){
+                          if( ! userTopics.contains(topics[index])){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Home(topic: topics[index], uid: uid),
+                              ),
+                            );
+                          }
 
-                          },
-                          child: CustomCard(
-                            iconData: topicIcon(topics[index]),
-                            text: topics[index],
-                            completed: userTopics.contains(topics[index]),
-                          ),
+                        },
+                        child: CustomCard(
+                          iconData: topicIcon(topics[index]),
+                          text: topics[index],
+                          completed: userTopics.contains(topics[index]),
                         ),
                       ),
                     ),
+
                   ),
                 ],
               ),
