@@ -34,32 +34,32 @@ Widget build(BuildContext context) {
 
   return Scaffold(
     backgroundColor: Colors.white,
-    body: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        // Background image with text on top
-        Container(
-          height: MediaQuery.of(context).size.height * 0.60, // Adjust the height as needed
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(backgroundImage),
-              fit: BoxFit.cover,
+    body: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          // Background image with text on top
+          Container(
+            height: MediaQuery.of(context).size.height * 0.60, // Adjust the height as needed
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(backgroundImage),
+                fit: BoxFit.cover,
+              ),
+            ),
+            alignment: Alignment.center,
+            child: const Text(
+              'Welcome To PollArt',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
-          alignment: Alignment.center,
-          child: const Text(
-            'Welcome To PollArt',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        // Form starts here
-        Expanded(
-          child: Padding(
+          // Form starts here
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Form(
               key: _formKey,
@@ -96,31 +96,32 @@ Widget build(BuildContext context) {
                   ),
                   SizedBox(height: 16.0),
                   TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/user_info_form');
-                  },
-                  style: TextButton.styleFrom(
-                    primary: Colors.blue, // Text color
-                    backgroundColor: const Color.fromARGB(0, 0, 0, 0), // Transparent background
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Minimizes the tap area to the size of the child
-                    padding: EdgeInsets.zero, // No padding
-                  ),
-                  child: Text(
-                    'Not registered? Register here',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline, // Underline to indicate it's a link
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/user_info_form');
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.blue, // Text color
+                      backgroundColor: const Color.fromARGB(0, 0, 0, 0), // Transparent background
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Minimizes the tap area to the size of the child
+                      padding: EdgeInsets.zero, // No padding
+                    ),
+                    child: Text(
+                      'Not registered? Register here',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline, // Underline to indicate it's a link
+                      ),
                     ),
                   ),
-                ),
                 ],
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
+
 
   Widget _buildTextField(String label, TextEditingController controller,
       {TextInputType? keyboardType, String? Function(String?)? validator}) {
