@@ -13,8 +13,8 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: AnimatedSplashScreen(
           duration: 3000,
-          splash: Lottie.asset(
-            'Json/splash_animation.json',
+          splash: Lottie.network(
+            "https://lottie.host/d2d950f5-eb3a-4613-bbae-fd47e43f911a/54wUfcuwcF.json",
             width: MediaQuery.of(context).size.width, // width of the device
             height: MediaQuery.of(context).size.height, // height of the device
             fit: BoxFit.contain, // to avoid distortion
