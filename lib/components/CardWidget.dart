@@ -49,7 +49,7 @@ class CardWidget extends StatelessWidget {
                     topRight: Radius.circular(borderRadius),
                   ),
                   child: Image(
-                    image: AssetImage("images/$answer.png"),
+                    image: AssetImage("assets/images/$answer.png"),
                     fit: BoxFit.fill,
                   ),
                 ),

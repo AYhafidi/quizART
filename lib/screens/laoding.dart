@@ -17,7 +17,7 @@ class _LoadingState extends State<Loading> {
   @override
   void initState() {
     super.initState();
-    //db.addQuestions("data.json");
+    //db.addQuestions("assets/Json/data.json");
   }
 
 
@@ -34,12 +34,12 @@ class _LoadingState extends State<Loading> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children:[
             Lottie.asset(
-              'Json/Loading1.json',
+              'assets/Json/Loading1.json',
             fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
            ),
 
             Lottie.asset(
-              'Json/Loading2.json',
+              'assets/Json/Loading2.json',
               fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
             ),
           ]

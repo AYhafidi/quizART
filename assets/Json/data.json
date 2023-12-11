@@ -1,5 +1,5 @@
 {
-  "title": "Education",
+  "title": "Gaming",
   "Questions": {
     "1": {
       "is_linked": true,
@@ -20,7 +20,7 @@
       "text": "Rank these games per order of preference?",
       "answers": ["Action", "RPG", "Shooter", "MOBA", "Battle Royale", "Strategy", "Simulation", "Sports"],
       "type": "rank",
-      "nextIndex": "4"
+      "nextIndex": "51"
     },
     "4": {
       "is_linked": true,
@@ -339,6 +339,13 @@
       "answers": ["rate"],
       "scale": [1, 20],
       "nextIndex": "-1"
+    },
+    "51": {
+      "text": "what your favorite type of cofée ?",
+      "is_linked": false,
+      "type": "image",
+      "answers": ["cappuccino", "espresso", "callofduty"],
+      "nextIndex": "4"
     }
   }
 }

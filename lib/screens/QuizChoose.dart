@@ -109,10 +109,14 @@ class QuizChooseState extends State<QuizChoose> {
 
             return Scaffold(
               appBar: AppBar(
-                title: Text(
-                  'Menu page',
-                  style: GoogleFonts.lexend(
-                    fontSize: 20.0,
+                title: Center(
+                  child: Text(
+                    'Choose Quiz',
+                    style: GoogleFonts.lexend(
+
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
                   ),
                 ),
                 backgroundColor: const Color(0xFF032174),
@@ -171,7 +175,7 @@ class QuizChooseState extends State<QuizChoose> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: Lottie.asset(
-                                    'Json/$topic.json',
+                                    'assets/Json/$topic.json',
                                     fit: BoxFit.contain, // Use BoxFit.contain to avoid distortion
                                   ),
                                 ),

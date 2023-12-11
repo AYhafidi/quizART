@@ -40,7 +40,7 @@ Widget build(BuildContext context) {
         children: <Widget>[
           // Background image with text on top
           Container(
-            height: MediaQuery.of(context).size.height * 0.60, // Adjust the height as needed
+            height: MediaQuery.of(context).size.height * 0.65, // Adjust the height as needed
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(backgroundImage),

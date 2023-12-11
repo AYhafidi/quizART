@@ -156,6 +156,7 @@ class _HomeState extends State<Home> {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 25),
             const Center(
