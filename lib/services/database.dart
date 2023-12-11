@@ -63,7 +63,6 @@ class DataBaseService{
       // Get the current data of the document
       DocumentSnapshot userSnapshot = await userDoc.get();
       dynamic userData = userSnapshot.data() ?? {};
-
       return userData.keys.toList();
     }catch(e){
         print("Error occured : ${e}");
@@ -105,4 +104,65 @@ class DataBaseService{
       print("Failed to add quiz to user: $e");
     }
   }
+  Future<Map<String, dynamic>> getUserData(String uid) async {
+    try {
+      DocumentSnapshot userSnapshot = await usersCollection.doc(uid).get();
+      return userSnapshot.data() as Map<String, dynamic> ?? {};
+    } catch (e) {
+      print("Erreur lors de la récupération des données utilisateur : $e");
+      return {};
+    }
+  }
+  //get user responses
+
+  Future<Map<String, dynamic>> getTopicResponses(String uid, String topic) async {
+    try {
+      DocumentSnapshot userDocument = await AnswersCollection.doc(uid).get();
+
+      if (userDocument.exists) {
+        // Vérifiez si le document de l'utilisateur existe dans la collection
+        Map<String, dynamic> userData = userDocument.data() as Map<String, dynamic>;
+
+        if (userData.containsKey(topic)) {
+          // Vérifiez si le champ du topic existe dans le document de l'utilisateur
+          print(userData[topic]);
+          return userData[topic] as Map<String, dynamic>;
+        } else {
+          // Le topic n'a pas encore de réponses
+          return {};
+        }
+      } else {
+        // L'utilisateur n'a pas encore de document dans la collection
+        return {};
+      }
+    } catch (e) {
+      print("Erreur lors de la récupération des réponses pour le sujet $topic et l'ID utilisateur $uid : $e");
+      return {};
+    }
+  }
+
+  Future<String?> getQuestionText(String topic, String index) async {
+    try {
+      // Query the collection based on the provided topic and questions index
+      var querySnapshot = await questionCollection
+          .where('title', isEqualTo: topic)
+          .where('questions.$index', isNotEqualTo: null)
+          .limit(1)
+          .get();
+
+      // Check if any documents match the query
+      if (querySnapshot.docs.isNotEmpty) {
+        // Retrieve the text of the question
+        String questionText = querySnapshot.docs[0]['questions'][index]['text'];
+        return questionText;
+      }
+
+      // If the question is not found, return null or a default value
+      return null;
+    } catch (e) {
+      print('Erreur lors de la récupération du texte de la question : $e');
+      throw e; // You can handle the error appropriately here
+    }
+  }
+
 }

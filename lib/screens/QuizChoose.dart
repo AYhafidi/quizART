@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quizart/screens/home.dart';
+import 'package:quizart/screens/bilan.dart';
 import 'package:quizart/screens/laoding.dart';
 import 'package:quizart/services/database.dart';
 import 'package:quizart/components/CustomCard.dart';
@@ -142,7 +143,15 @@ class QuizChooseState extends State<QuizChoose> {
                                             builder: (context) => Home(topic: topic, uid: uid),
                                          ),
                                     );
-                              }
+                              }else {
+                                      // L'utilisateur a déjà répondu à ce sujet, naviguez vers la page Bilan
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => BilanPage(topic: topic, uid: uid),
+                                        ),
+                                      );
+                                    }
                                     },
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.7,
@@ -195,6 +204,14 @@ class QuizChooseState extends State<QuizChoose> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Home(topic: topics[index], uid: uid),
+                                ),
+                              );
+                            }else {
+                              // L'utilisateur a déjà répondu à ce sujet, naviguez vers la page Bilan
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BilanPage(topic: topics[index], uid: uid),
                                 ),
                               );
                             }
